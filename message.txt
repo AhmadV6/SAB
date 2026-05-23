@@ -1,0 +1,3783 @@
+--[[
+    ALL FREE TOKINU HUB GUI SOURCES
+    discord.gg/rNvAU6cjVB
+]]
+
+
+-- // Tokinu Speed Booster GUI
+-- // Clean rewrite from table-based format
+do
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Helper: quick background flash for action buttons
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	local flash_color = Color3.fromRGB(50, 50, 50)
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = flash_color }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // GUI Root
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "TokinuBoosterGUI"
+screen_gui.Parent = player_gui
+
+-- // Main Frame
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(1, -175, 0.29, 0)
+main_frame.Size = UDim2.new(0, 160, 0, 110)
+main_frame.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
+main_frame.BorderSizePixel = 0
+main_frame.Name = "main_frame"
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 12)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.Color = Color3.fromRGB(30, 30, 30)
+main_stroke.Parent = main_frame
+
+-- // Title Label
+local title_label = Instance.new("TextLabel")
+title_label.Text = "      Speed Booster"
+title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_label.TextSize = 14
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 5, 0, 5)
+title_label.Size = UDim2.new(1, -10, 0, 30)
+title_label.BackgroundTransparency = 1
+title_label.Name = "title_label"
+title_label.Parent = main_frame
+
+-- // Drag functionality
+local dragging = false
+local drag_start, frame_start
+
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		frame_start = main_frame.Position
+	end
+end)
+
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			frame_start.X.Scale,
+			frame_start.X.Offset + delta.X,
+			frame_start.Y.Scale,
+			frame_start.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- // Speed Input Box Container
+local input_frame = Instance.new("Frame")
+input_frame.Position = UDim2.new(0, 10, 0, 35)
+input_frame.Size = UDim2.new(1, -20, 0, 35)
+input_frame.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+input_frame.BorderSizePixel = 0
+input_frame.Name = "input_frame"
+input_frame.Parent = main_frame
+
+local input_corner = Instance.new("UICorner")
+input_corner.Parent = input_frame
+
+-- // Speed TextBox
+local speed_box = Instance.new("TextBox")
+speed_box.Text = "27"
+speed_box.TextColor3 = Color3.fromRGB(255, 255, 255)
+speed_box.TextSize = 16
+speed_box.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+speed_box.PlaceholderText = "Speed"
+speed_box.PlaceholderColor3 = Color3.fromRGB(80, 80, 80)
+speed_box.Position = UDim2.new(0, 5, 0, 0)
+speed_box.Size = UDim2.new(1, -10, 1, 0)
+speed_box.BackgroundTransparency = 1
+speed_box.Name = "speed_box"
+speed_box.Parent = input_frame
+
+-- // Apply Button Frame
+local apply_frame = Instance.new("Frame")
+apply_frame.Position = UDim2.new(0.5, -30, 1, -35)
+apply_frame.Size = UDim2.new(0, 60, 0, 26)
+apply_frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+apply_frame.BorderSizePixel = 0
+apply_frame.Name = "apply_frame"
+apply_frame.Parent = main_frame
+
+local apply_corner = Instance.new("UICorner")
+apply_corner.CornerRadius = UDim.new(1, 0)
+apply_corner.Parent = apply_frame
+
+-- // Apply Image Button (play icon)
+local apply_button = Instance.new("ImageButton")
+apply_button.Image = "rbxassetid://6023426923"
+apply_button.ImageTransparency = 0.2
+apply_button.Position = UDim2.new(0, 2, 0.5, -11)
+apply_button.Size = UDim2.new(0, 22, 0, 22)
+apply_button.BackgroundTransparency = 1
+apply_button.Name = "apply_button"
+apply_button.Parent = apply_frame
+
+-- // Apply button flash
+apply_button.MouseButton1Click:Connect(function()
+	flash_button(apply_frame)
+	-- dead: no actual speed logic
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub - Instant Reset GUI
+-- // Clean rewrite from table-based format
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Helper: flash background on action buttons
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = Color3.fromRGB(50, 70, 120) }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // Helper: make a toggle row with sliding dot
+-- Returns the row frame; pass label text and a callback for state change
+local function make_toggle_row(parent, pos_y, label_text)
+	local row = Instance.new("Frame")
+	row.Position = UDim2.new(0, 10, 0, pos_y)
+	row.Size = UDim2.new(1, -20, 0, 34)
+	row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+	row.Name = "row_" .. label_text:lower():gsub("%s+", "_")
+	row.Parent = parent
+
+	local row_stroke = Instance.new("UIStroke")
+	row_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	row_stroke.Color = Color3.fromRGB(40, 80, 180)
+	row_stroke.Thickness = 1.5
+	row_stroke.Parent = row
+
+	local row_gradient = Instance.new("UIGradient")
+	row_gradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+	})
+	row_gradient.Rotation = 156.8
+	row_gradient.Parent = row_stroke
+
+	local row_corner = Instance.new("UICorner")
+	row_corner.Parent = row
+
+	-- Rotating gradient animation
+	task.spawn(function()
+		local r = 156.8
+		while row.Parent do
+			r = (r + 0.3) % 360
+			row_gradient.Rotation = r
+			task.wait(0.03)
+		end
+	end)
+
+	local text_label = Instance.new("TextLabel")
+	text_label.Text = label_text
+	text_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+	text_label.TextSize = 14
+	text_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+	text_label.Size = UDim2.new(1, 0, 1, 0)
+	text_label.BackgroundTransparency = 1
+	text_label.Parent = row
+
+	-- Toggle switch track
+	local toggle_track = Instance.new("Frame")
+	toggle_track.Position = UDim2.new(1, -46, 0.5, -9)
+	toggle_track.Size = UDim2.new(0, 36, 0, 18)
+	toggle_track.BackgroundTransparency = 1
+	toggle_track.Name = "toggle_track"
+	toggle_track.Parent = row
+
+	local track_corner = Instance.new("UICorner")
+	track_corner.CornerRadius = UDim.new(0, 9)
+	track_corner.Parent = toggle_track
+
+	local track_stroke = Instance.new("UIStroke")
+	track_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	track_stroke.Color = Color3.fromRGB(40, 80, 180)
+	track_stroke.Thickness = 2
+	track_stroke.Parent = toggle_track
+
+	local track_stroke_gradient = Instance.new("UIGradient")
+	track_stroke_gradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+	})
+	track_stroke_gradient.Rotation = 155.1
+	track_stroke_gradient.Parent = track_stroke
+
+	-- Toggle dot
+	local toggle_dot = Instance.new("Frame")
+	toggle_dot.Position = UDim2.new(0, 2, 0.5, -7)
+	toggle_dot.Size = UDim2.new(0, 14, 0, 14)
+	toggle_dot.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+	toggle_dot.Name = "toggle_dot"
+	toggle_dot.Parent = toggle_track
+
+	local dot_corner = Instance.new("UICorner")
+	dot_corner.CornerRadius = UDim.new(0, 7)
+	dot_corner.Parent = toggle_dot
+
+	-- Invisible click button over the row
+	local click_btn = Instance.new("TextButton")
+	click_btn.Text = ""
+	click_btn.Size = UDim2.new(1, 0, 1, 0)
+	click_btn.BackgroundTransparency = 1
+	click_btn.Parent = row
+
+	-- Toggle state
+	local is_on = false
+
+	click_btn.MouseButton1Click:Connect(function()
+		is_on = not is_on
+		-- Slide dot smoothly
+		local target_x = is_on and UDim2.new(1, -16, 0.5, -7) or UDim2.new(0, 2, 0.5, -7)
+		local dot_color = is_on and Color3.fromRGB(100, 255, 150) or Color3.fromRGB(100, 150, 255)
+		tween_service:Create(toggle_dot, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {
+			Position = target_x,
+			BackgroundColor3 = dot_color,
+		}):Play()
+		-- dead: no real logic
+	end)
+
+	return row
+end
+
+-- // GUI Root
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "tokinu"
+screen_gui.Parent = player_gui
+
+-- ============================================================
+-- // Main Frame
+-- ============================================================
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0, 30, 0, 137)
+main_frame.Size = UDim2.new(0, 200, 0, 145)
+main_frame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+main_frame.BackgroundTransparency = 0.4
+main_frame.ClipsDescendants = true
+main_frame.Name = "main_frame"
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 10)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+main_stroke.Color = Color3.fromRGB(40, 80, 180)
+main_stroke.Thickness = 2
+main_stroke.Parent = main_frame
+
+local main_stroke_gradient = Instance.new("UIGradient")
+main_stroke_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+main_stroke_gradient.Rotation = 235.2
+main_stroke_gradient.Parent = main_stroke
+
+-- Rotating border gradient animation
+task.spawn(function()
+	local r = 235.2
+	while main_frame.Parent do
+		r = (r + 0.3) % 360
+		main_stroke_gradient.Rotation = r
+		task.wait(0.03)
+	end
+end)
+
+-- // Title
+local title_label = Instance.new("TextLabel")
+title_label.Text = "            Tokinu Hub"
+title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
+title_label.TextSize = 14
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 10, 0, 5)
+title_label.Size = UDim2.new(1, -40, 0, 20)
+title_label.BackgroundTransparency = 1
+title_label.Name = "title_label"
+title_label.Parent = main_frame
+
+local title_gradient = Instance.new("UIGradient")
+title_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(0.35, Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200, 220, 255)),
+	ColorSequenceKeypoint.new(0.65, Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 100, 200)),
+})
+title_gradient.Offset = Vector2.new(-1.228, 0)
+title_gradient.Parent = title_label
+
+-- Shimmer animation on title gradient
+task.spawn(function()
+	local offset = -1.228
+	while title_label.Parent do
+		offset = offset + 0.005
+		if offset > 1.5 then offset = -1.5 end
+		title_gradient.Offset = Vector2.new(offset, 0)
+		task.wait(0.03)
+	end
+end)
+
+-- // Subtitle
+local subtitle_label = Instance.new("TextLabel")
+subtitle_label.Text = "                 Instant Reset"
+subtitle_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+subtitle_label.TextTransparency = 0.3
+subtitle_label.TextSize = 11
+subtitle_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+subtitle_label.TextXAlignment = Enum.TextXAlignment.Left
+subtitle_label.Position = UDim2.new(0, 10, 0, 23)
+subtitle_label.Size = UDim2.new(1, -40, 0, 15)
+subtitle_label.BackgroundTransparency = 1
+subtitle_label.Name = "subtitle_label"
+subtitle_label.Parent = main_frame
+
+-- // Minimize button
+local minimize_btn = Instance.new("TextButton")
+minimize_btn.Text = "•"
+minimize_btn.TextColor3 = Color3.fromRGB(100, 150, 255)
+minimize_btn.TextSize = 18
+minimize_btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+minimize_btn.Position = UDim2.new(1, -32, 0, 8)
+minimize_btn.Size = UDim2.new(0, 24, 0, 24)
+minimize_btn.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+minimize_btn.Name = "minimize_btn"
+minimize_btn.Parent = main_frame
+
+local min_btn_corner = Instance.new("UICorner")
+min_btn_corner.CornerRadius = UDim.new(0, 6)
+min_btn_corner.Parent = minimize_btn
+
+local min_btn_stroke = Instance.new("UIStroke")
+min_btn_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+min_btn_stroke.Color = Color3.fromRGB(40, 80, 180)
+min_btn_stroke.Thickness = 2
+min_btn_stroke.Parent = minimize_btn
+
+-- // Drag via title label area
+local dragging, drag_start, frame_start = false, nil, nil
+
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		frame_start = main_frame.Position
+	end
+end)
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			frame_start.X.Scale, frame_start.X.Offset + delta.X,
+			frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- ============================================================
+-- // Content (the rows to show/hide on minimize)
+-- ============================================================
+local content_holder = Instance.new("Frame")
+content_holder.Position = UDim2.new(0, 0, 0, 40)
+content_holder.Size = UDim2.new(1, 0, 1, -40)
+content_holder.BackgroundTransparency = 1
+content_holder.ClipsDescendants = true
+content_holder.Name = "content_holder"
+content_holder.Parent = main_frame
+
+-- // Insta Reset row (action button style)
+local insta_reset_row = Instance.new("Frame")
+insta_reset_row.Position = UDim2.new(0, 10, 0, 8)
+insta_reset_row.Size = UDim2.new(1, -20, 0, 34)
+insta_reset_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+insta_reset_row.Name = "insta_reset_row"
+insta_reset_row.Parent = content_holder
+
+local ir_corner = Instance.new("UICorner")
+ir_corner.Parent = insta_reset_row
+
+local ir_stroke = Instance.new("UIStroke")
+ir_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+ir_stroke.Color = Color3.fromRGB(40, 80, 180)
+ir_stroke.Thickness = 1.5
+ir_stroke.Parent = insta_reset_row
+
+local ir_gradient = Instance.new("UIGradient")
+ir_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+ir_gradient.Rotation = 156.8
+ir_gradient.Parent = ir_stroke
+
+local ir_label = Instance.new("TextLabel")
+ir_label.Text = "Insta Reset"
+ir_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+ir_label.TextSize = 14
+ir_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+ir_label.Size = UDim2.new(1, 0, 1, 0)
+ir_label.BackgroundTransparency = 1
+ir_label.Parent = insta_reset_row
+
+local ir_click_btn = Instance.new("TextButton")
+ir_click_btn.Text = ""
+ir_click_btn.Size = UDim2.new(1, 0, 1, 0)
+ir_click_btn.BackgroundTransparency = 1
+ir_click_btn.Parent = insta_reset_row
+
+ir_click_btn.MouseButton1Click:Connect(function()
+	flash_button(insta_reset_row)
+	-- dead: no real logic
+end)
+
+-- // Keybind row
+local keybind_row = Instance.new("Frame")
+keybind_row.Position = UDim2.new(0, 10, 0, 48)
+keybind_row.Size = UDim2.new(1, -20, 0, 34)
+keybind_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+keybind_row.Name = "keybind_row"
+keybind_row.Parent = content_holder
+
+local kb_corner = Instance.new("UICorner")
+kb_corner.Parent = keybind_row
+
+local kb_stroke = Instance.new("UIStroke")
+kb_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kb_stroke.Color = Color3.fromRGB(40, 80, 180)
+kb_stroke.Thickness = 1.5
+kb_stroke.Parent = keybind_row
+
+local kb_gradient = Instance.new("UIGradient")
+kb_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+kb_gradient.Rotation = 156.8
+kb_gradient.Parent = kb_stroke
+
+local kb_label = Instance.new("TextLabel")
+kb_label.Text = "keybind"
+kb_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+kb_label.TextSize = 13
+kb_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kb_label.TextXAlignment = Enum.TextXAlignment.Left
+kb_label.Position = UDim2.new(0, 10, 0, 0)
+kb_label.Size = UDim2.new(1, -80, 1, 0)
+kb_label.BackgroundTransparency = 1
+kb_label.Parent = keybind_row
+
+local keybind_btn = Instance.new("TextButton")
+keybind_btn.Text = "[ -- ]"
+keybind_btn.TextColor3 = Color3.fromRGB(100, 150, 255)
+keybind_btn.TextSize = 10
+keybind_btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+keybind_btn.Position = UDim2.new(1, -68, 0.5, -11)
+keybind_btn.Size = UDim2.new(0, 60, 0, 22)
+keybind_btn.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
+keybind_btn.BackgroundTransparency = 0.3
+keybind_btn.Name = "keybind_btn"
+keybind_btn.Parent = keybind_row
+
+local kb_btn_corner = Instance.new("UICorner")
+kb_btn_corner.CornerRadius = UDim.new(0, 5)
+kb_btn_corner.Parent = keybind_btn
+
+keybind_btn.MouseButton1Click:Connect(function()
+	flash_button(keybind_btn)
+	-- dead: no real keybind changing logic
+end)
+
+-- // Discord watermark
+local discord_label = Instance.new("TextLabel")
+discord_label.Text = "discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+discord_label.TextTransparency = 0.3
+discord_label.TextSize = 11
+discord_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+discord_label.Position = UDim2.new(0, 0, 1, -18)
+discord_label.Size = UDim2.new(1, 0, 0, 15)
+discord_label.BackgroundTransparency = 1
+discord_label.Name = "discord_label"
+discord_label.Parent = main_frame
+
+-- ============================================================
+-- // Secondary Frame (Reset on Balloon toggle — hidden by default)
+-- ============================================================
+local secondary_frame = Instance.new("Frame")
+secondary_frame.Position = UDim2.new(0, 0, 0, -56)
+secondary_frame.Size = UDim2.new(0, 200, 0, 42)
+secondary_frame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+secondary_frame.BackgroundTransparency = 0.4
+secondary_frame.ClipsDescendants = true
+secondary_frame.Visible = false
+secondary_frame.Name = "secondary_frame"
+secondary_frame.Parent = screen_gui
+
+local sec_corner = Instance.new("UICorner")
+sec_corner.CornerRadius = UDim.new(0, 10)
+sec_corner.Parent = secondary_frame
+
+local sec_stroke = Instance.new("UIStroke")
+sec_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+sec_stroke.Color = Color3.fromRGB(40, 80, 180)
+sec_stroke.Thickness = 2
+sec_stroke.Parent = secondary_frame
+
+local balloon_row = Instance.new("Frame")
+balloon_row.Position = UDim2.new(0, 10, 0, 5)
+balloon_row.Size = UDim2.new(1, -20, 0, 32)
+balloon_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+balloon_row.Name = "balloon_row"
+balloon_row.Parent = secondary_frame
+
+local bal_corner = Instance.new("UICorner")
+bal_corner.Parent = balloon_row
+
+local bal_stroke = Instance.new("UIStroke")
+bal_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+bal_stroke.Color = Color3.fromRGB(40, 80, 180)
+bal_stroke.Thickness = 1.5
+bal_stroke.Parent = balloon_row
+
+local bal_stroke_gradient = Instance.new("UIGradient")
+bal_stroke_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+bal_stroke_gradient.Rotation = 156.8
+bal_stroke_gradient.Parent = bal_stroke
+
+local balloon_label = Instance.new("TextLabel")
+balloon_label.Text = "Reset on Balloon"
+balloon_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+balloon_label.TextSize = 13
+balloon_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+balloon_label.TextXAlignment = Enum.TextXAlignment.Left
+balloon_label.Position = UDim2.new(0, 10, 0, 0)
+balloon_label.Size = UDim2.new(1, -50, 1, 0)
+balloon_label.BackgroundTransparency = 1
+balloon_label.Parent = balloon_row
+
+local balloon_state_label = Instance.new("TextLabel")
+balloon_state_label.Text = "OFF"
+balloon_state_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+balloon_state_label.TextSize = 12
+balloon_state_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+balloon_state_label.TextXAlignment = Enum.TextXAlignment.Right
+balloon_state_label.Position = UDim2.new(1, -42, 0, 0)
+balloon_state_label.Size = UDim2.new(0, 32, 1, 0)
+balloon_state_label.BackgroundTransparency = 1
+balloon_state_label.Parent = balloon_row
+
+local balloon_click_btn = Instance.new("TextButton")
+balloon_click_btn.Text = ""
+balloon_click_btn.Size = UDim2.new(1, 0, 1, 0)
+balloon_click_btn.BackgroundTransparency = 1
+balloon_click_btn.Parent = balloon_row
+
+local balloon_on = false
+balloon_click_btn.MouseButton1Click:Connect(function()
+	balloon_on = not balloon_on
+	balloon_state_label.Text = balloon_on and "ON" or "OFF"
+	balloon_state_label.TextColor3 = balloon_on and Color3.fromRGB(100, 255, 150) or Color3.fromRGB(255, 255, 255)
+	-- dead: no real logic
+end)
+
+-- ============================================================
+-- // Minimize logic
+-- ============================================================
+local minimized = false
+local full_height = 145
+local mini_height = 44 -- just the header
+
+minimize_btn.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	local target_size = minimized and UDim2.new(0, 200, 0, mini_height) or UDim2.new(0, 200, 0, full_height)
+	local target_content_trans = minimized and 1 or 0
+
+	tween_service:Create(main_frame, TweenInfo.new(0.25, Enum.EasingStyle.Quad), { Size = target_size }):Play()
+	tween_service:Create(content_holder, TweenInfo.new(0.15), { GroupTransparency = target_content_trans }):Play()
+	minimize_btn.Text = minimized and "+" or "•"
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub | Lagger GUI (KevinHubLagger)
+-- // Clean rewrite from table-based format
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Helper: flash background on action buttons
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = Color3.fromRGB(50, 70, 120) }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // GUI Root
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "KevinHubLagger"
+screen_gui.Parent = player_gui
+
+-- ============================================================
+-- // Main Frame
+-- ============================================================
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0, 30, 0, 137)
+main_frame.Size = UDim2.new(0, 200, 0, 130)
+main_frame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+main_frame.BackgroundTransparency = 0.4
+main_frame.ClipsDescendants = true
+main_frame.Name = "main_frame"
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 10)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+main_stroke.Color = Color3.fromRGB(40, 80, 180)
+main_stroke.Thickness = 2
+main_stroke.Parent = main_frame
+
+local main_stroke_gradient = Instance.new("UIGradient")
+main_stroke_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+main_stroke_gradient.Rotation = 224.1
+main_stroke_gradient.Parent = main_stroke
+
+-- Rotating border gradient
+task.spawn(function()
+	local r = 224.1
+	while main_frame.Parent do
+		r = (r + 0.3) % 360
+		main_stroke_gradient.Rotation = r
+		task.wait(0.03)
+	end
+end)
+
+-- ============================================================
+-- // Header
+-- ============================================================
+local title_label = Instance.new("TextLabel")
+title_label.Text = "     Tokinu Hub | Lagger"
+title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
+title_label.TextSize = 15
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 10, 0, 5)
+title_label.Size = UDim2.new(1, -40, 0, 20)
+title_label.BackgroundTransparency = 1
+title_label.Name = "title_label"
+title_label.Parent = main_frame
+
+local title_gradient = Instance.new("UIGradient")
+title_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(100, 150, 255)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+title_gradient.Rotation = 59.4
+title_gradient.Parent = title_label
+
+local subtitle_label = Instance.new("TextLabel")
+subtitle_label.Text = "              discord.gg/tokinu"
+subtitle_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+subtitle_label.TextTransparency = 0.3
+subtitle_label.TextSize = 11
+subtitle_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+subtitle_label.TextXAlignment = Enum.TextXAlignment.Left
+subtitle_label.Position = UDim2.new(0, 10, 0, 23)
+subtitle_label.Size = UDim2.new(1, -40, 0, 15)
+subtitle_label.BackgroundTransparency = 1
+subtitle_label.Name = "subtitle_label"
+subtitle_label.Parent = main_frame
+
+-- // Minimize Button
+local minimize_btn = Instance.new("TextButton")
+minimize_btn.Text = "-"
+minimize_btn.TextColor3 = Color3.fromRGB(100, 150, 255)
+minimize_btn.TextSize = 14
+minimize_btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+minimize_btn.Position = UDim2.new(1, -32, 0, 8)
+minimize_btn.Size = UDim2.new(0, 24, 0, 24)
+minimize_btn.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+minimize_btn.Name = "minimize_btn"
+minimize_btn.Parent = main_frame
+
+local min_btn_corner = Instance.new("UICorner")
+min_btn_corner.CornerRadius = UDim.new(0, 6)
+min_btn_corner.Parent = minimize_btn
+
+local min_btn_stroke = Instance.new("UIStroke")
+min_btn_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+min_btn_stroke.Color = Color3.fromRGB(40, 80, 180)
+min_btn_stroke.Thickness = 2
+min_btn_stroke.Parent = minimize_btn
+
+-- // Drag via title
+local dragging, drag_start, frame_start = false, nil, nil
+
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		frame_start = main_frame.Position
+	end
+end)
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			frame_start.X.Scale, frame_start.X.Offset + delta.X,
+			frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- ============================================================
+-- // Content holder (for minimize)
+-- ============================================================
+local content_holder = Instance.new("Frame")
+content_holder.Position = UDim2.new(0, 0, 0, 44)
+content_holder.Size = UDim2.new(1, 0, 1, -44)
+content_holder.BackgroundTransparency = 1
+content_holder.ClipsDescendants = true
+content_holder.Name = "content_holder"
+content_holder.Parent = main_frame
+
+-- ============================================================
+-- // "Lag them mfs" toggle row with sliding dot
+-- ============================================================
+local lag_row = Instance.new("Frame")
+lag_row.Position = UDim2.new(0, 10, 0, 4)
+lag_row.Size = UDim2.new(1, -20, 0, 34)
+lag_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+lag_row.Name = "lag_row"
+lag_row.Parent = content_holder
+
+local lag_row_corner = Instance.new("UICorner")
+lag_row_corner.Parent = lag_row
+
+local lag_row_stroke = Instance.new("UIStroke")
+lag_row_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lag_row_stroke.Color = Color3.fromRGB(40, 80, 180)
+lag_row_stroke.Thickness = 1.5
+lag_row_stroke.Parent = lag_row
+
+local lag_stroke_gradient = Instance.new("UIGradient")
+lag_stroke_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+lag_stroke_gradient.Rotation = 149.4
+lag_stroke_gradient.Parent = lag_row_stroke
+
+task.spawn(function()
+	local r = 149.4
+	while lag_row.Parent do
+		r = (r + 0.3) % 360
+		lag_stroke_gradient.Rotation = r
+		task.wait(0.03)
+	end
+end)
+
+local lag_label = Instance.new("TextLabel")
+lag_label.Text = "lag them mfs"
+lag_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+lag_label.TextSize = 13
+lag_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+lag_label.TextXAlignment = Enum.TextXAlignment.Left
+lag_label.Position = UDim2.new(0, 10, 0, 0)
+lag_label.Size = UDim2.new(1, -60, 1, 0)
+lag_label.BackgroundTransparency = 1
+lag_label.Parent = lag_row
+
+-- Toggle switch track
+local lag_toggle_track = Instance.new("Frame")
+lag_toggle_track.Position = UDim2.new(1, -46, 0.5, -9)
+lag_toggle_track.Size = UDim2.new(0, 36, 0, 18)
+lag_toggle_track.BackgroundTransparency = 1
+lag_toggle_track.Name = "lag_toggle_track"
+lag_toggle_track.Parent = lag_row
+
+local lag_track_corner = Instance.new("UICorner")
+lag_track_corner.CornerRadius = UDim.new(0, 9)
+lag_track_corner.Parent = lag_toggle_track
+
+local lag_track_stroke = Instance.new("UIStroke")
+lag_track_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lag_track_stroke.Color = Color3.fromRGB(40, 80, 180)
+lag_track_stroke.Thickness = 2
+lag_track_stroke.Parent = lag_toggle_track
+
+local lag_track_gradient = Instance.new("UIGradient")
+lag_track_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+lag_track_gradient.Rotation = 224.1
+lag_track_gradient.Parent = lag_track_stroke
+
+local lag_dot = Instance.new("Frame")
+lag_dot.Position = UDim2.new(0, 2, 0.5, -7)
+lag_dot.Size = UDim2.new(0, 14, 0, 14)
+lag_dot.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+lag_dot.Name = "lag_dot"
+lag_dot.Parent = lag_toggle_track
+
+local lag_dot_corner = Instance.new("UICorner")
+lag_dot_corner.CornerRadius = UDim.new(0, 7)
+lag_dot_corner.Parent = lag_dot
+
+local lag_click_btn = Instance.new("TextButton")
+lag_click_btn.Text = ""
+lag_click_btn.Size = UDim2.new(1, 0, 1, 0)
+lag_click_btn.BackgroundTransparency = 1
+lag_click_btn.Parent = lag_row
+
+local lag_on = false
+lag_click_btn.MouseButton1Click:Connect(function()
+	lag_on = not lag_on
+	local target_pos = lag_on and UDim2.new(1, -16, 0.5, -7) or UDim2.new(0, 2, 0.5, -7)
+	local dot_color = lag_on and Color3.fromRGB(100, 255, 150) or Color3.fromRGB(100, 150, 255)
+	tween_service:Create(lag_dot, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {
+		Position = target_pos,
+		BackgroundColor3 = dot_color,
+	}):Play()
+	-- dead: no real lag logic
+end)
+
+-- ============================================================
+-- // Keybind Row
+-- ============================================================
+local keybind_row = Instance.new("Frame")
+keybind_row.Position = UDim2.new(0, 10, 0, 44)
+keybind_row.Size = UDim2.new(1, -20, 0, 34)
+keybind_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+keybind_row.Name = "keybind_row"
+keybind_row.Parent = content_holder
+
+local kb_corner = Instance.new("UICorner")
+kb_corner.Parent = keybind_row
+
+local kb_stroke = Instance.new("UIStroke")
+kb_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kb_stroke.Color = Color3.fromRGB(40, 80, 180)
+kb_stroke.Thickness = 1.5
+kb_stroke.Parent = keybind_row
+
+local kb_stroke_gradient = Instance.new("UIGradient")
+kb_stroke_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0)),
+})
+kb_stroke_gradient.Rotation = 149.4
+kb_stroke_gradient.Parent = kb_stroke
+
+local kb_label = Instance.new("TextLabel")
+kb_label.Text = "keybind"
+kb_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+kb_label.TextSize = 13
+kb_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kb_label.TextXAlignment = Enum.TextXAlignment.Left
+kb_label.Position = UDim2.new(0, 10, 0, 0)
+kb_label.Size = UDim2.new(1, -80, 1, 0)
+kb_label.BackgroundTransparency = 1
+kb_label.Parent = keybind_row
+
+local keybind_btn = Instance.new("TextButton")
+keybind_btn.Text = "(--)"
+keybind_btn.TextColor3 = Color3.fromRGB(100, 150, 255)
+keybind_btn.TextSize = 10
+keybind_btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+keybind_btn.Position = UDim2.new(1, -68, 0.5, -11)
+keybind_btn.Size = UDim2.new(0, 60, 0, 22)
+keybind_btn.BackgroundColor3 = Color3.fromRGB(15, 25, 45)
+keybind_btn.BackgroundTransparency = 0.3
+keybind_btn.Name = "keybind_btn"
+keybind_btn.Parent = keybind_row
+
+local kb_btn_corner = Instance.new("UICorner")
+kb_btn_corner.CornerRadius = UDim.new(0, 5)
+kb_btn_corner.Parent = keybind_btn
+
+keybind_btn.MouseButton1Click:Connect(function()
+	flash_button(keybind_btn)
+	-- dead: no actual keybind logic
+end)
+
+-- ============================================================
+-- // Minimize logic
+-- ============================================================
+local minimized = false
+local full_height = 130
+local mini_height = 44
+
+minimize_btn.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	local target_size = minimized and UDim2.new(0, 200, 0, mini_height) or UDim2.new(0, 200, 0, full_height)
+	tween_service:Create(main_frame, TweenInfo.new(0.25, Enum.EasingStyle.Quad), { Size = target_size }):Play()
+	tween_service:Create(content_holder, TweenInfo.new(0.15), {
+		GroupTransparency = minimized and 1 or 0
+	}):Play()
+	minimize_btn.Text = minimized and "+" or "-"
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub - Flash TP GUI (jewjewjewsahur)
+-- // Clean rewrite from table-based format
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Helper: flash background on action buttons
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = Color3.fromRGB(50, 50, 60) }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // GUI Root
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "jewjewjewsahur"
+screen_gui.Parent = player_gui
+
+-- ============================================================
+-- // Main Frame
+-- ============================================================
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0.5, -120, 0.4, 0)
+main_frame.Size = UDim2.new(0, 240, 0, 240)
+main_frame.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
+main_frame.BorderSizePixel = 0
+main_frame.ClipsDescendants = true
+main_frame.Name = "main_frame"
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 12)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.Color = Color3.fromRGB(30, 30, 30)
+main_stroke.Parent = main_frame
+
+-- ============================================================
+-- // Header Bar
+-- ============================================================
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, 0, 0, 40)
+header.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
+header.BorderSizePixel = 0
+header.Name = "header"
+header.Parent = main_frame
+
+local header_corner = Instance.new("UICorner")
+header_corner.CornerRadius = UDim.new(0, 12)
+header_corner.Parent = header
+
+local title_label = Instance.new("TextLabel")
+title_label.Text = "  Tokinu Hub discord.gg/tokinu"
+title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_label.TextSize = 16
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 10, 0, 0)
+title_label.Size = UDim2.new(1, -20, 1, 0)
+title_label.BackgroundTransparency = 1
+title_label.Name = "title_label"
+title_label.Parent = header
+
+-- // Drag via header
+local dragging, drag_start, frame_start = false, nil, nil
+
+header.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		frame_start = main_frame.Position
+	end
+end)
+header.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			frame_start.X.Scale, frame_start.X.Offset + delta.X,
+			frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- ============================================================
+-- // Content holder (for minimize)
+-- ============================================================
+local content_holder = Instance.new("Frame")
+content_holder.Position = UDim2.new(0, 0, 0, 40)
+content_holder.Size = UDim2.new(1, 0, 1, -40)
+content_holder.BackgroundTransparency = 1
+content_holder.ClipsDescendants = true
+content_holder.Name = "content_holder"
+content_holder.Parent = main_frame
+
+-- ============================================================
+-- // Flash TP Button
+-- ============================================================
+local flash_tp_button = Instance.new("TextButton")
+flash_tp_button.Text = "Flash TP: ON"
+flash_tp_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+flash_tp_button.TextSize = 15
+flash_tp_button.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+flash_tp_button.Position = UDim2.new(0.5, -100, 0, 8)
+flash_tp_button.Size = UDim2.new(0, 200, 0, 38)
+flash_tp_button.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+flash_tp_button.BackgroundTransparency = 0.3
+flash_tp_button.BorderSizePixel = 0
+flash_tp_button.Name = "flash_tp_button"
+flash_tp_button.Parent = content_holder
+
+local ftp_corner = Instance.new("UICorner")
+ftp_corner.Parent = flash_tp_button
+
+local ftp_stroke = Instance.new("UIStroke")
+ftp_stroke.Color = Color3.fromRGB(60, 60, 60)
+ftp_stroke.Parent = flash_tp_button
+
+flash_tp_button.MouseButton1Click:Connect(function()
+	flash_button(flash_tp_button)
+	-- dead: no real TP logic
+end)
+
+-- ============================================================
+-- // Giant Potion Button
+-- ============================================================
+local giant_potion_button = Instance.new("TextButton")
+giant_potion_button.Text = "Giant Potion: OFF"
+giant_potion_button.TextColor3 = Color3.fromRGB(150, 150, 150)
+giant_potion_button.TextSize = 15
+giant_potion_button.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+giant_potion_button.Position = UDim2.new(0.5, -100, 0, 52)
+giant_potion_button.Size = UDim2.new(0, 200, 0, 38)
+giant_potion_button.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+giant_potion_button.BackgroundTransparency = 0.3
+giant_potion_button.BorderSizePixel = 0
+giant_potion_button.Name = "giant_potion_button"
+giant_potion_button.Parent = content_holder
+
+local gp_corner = Instance.new("UICorner")
+gp_corner.Parent = giant_potion_button
+
+local gp_stroke = Instance.new("UIStroke")
+gp_stroke.Color = Color3.fromRGB(40, 40, 40)
+gp_stroke.Parent = giant_potion_button
+
+giant_potion_button.MouseButton1Click:Connect(function()
+	flash_button(giant_potion_button)
+	-- dead: no real logic
+end)
+
+-- ============================================================
+-- // TP Trigger Panel (slider at bottom)
+-- ============================================================
+local tp_panel = Instance.new("Frame")
+tp_panel.Position = UDim2.new(0, 10, 1, -90)
+tp_panel.Size = UDim2.new(1, -20, 0, 80)
+tp_panel.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+tp_panel.BackgroundTransparency = 0.2
+tp_panel.BorderSizePixel = 0
+tp_panel.ClipsDescendants = true
+tp_panel.Name = "tp_panel"
+tp_panel.Parent = content_holder
+
+local tp_panel_corner = Instance.new("UICorner")
+tp_panel_corner.CornerRadius = UDim.new(0, 10)
+tp_panel_corner.Parent = tp_panel
+
+-- "when to trigger tp:" label
+local trigger_label = Instance.new("TextLabel")
+trigger_label.Text = "when to trigger tp:"
+trigger_label.TextColor3 = Color3.fromRGB(180, 180, 180)
+trigger_label.TextSize = 12
+trigger_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+trigger_label.TextXAlignment = Enum.TextXAlignment.Left
+trigger_label.Position = UDim2.new(0, 5, 0, 5)
+trigger_label.Size = UDim2.new(1, -10, 0, 25)
+trigger_label.BackgroundTransparency = 1
+trigger_label.Name = "trigger_label"
+trigger_label.Parent = tp_panel
+
+-- Percentage display box
+local pct_frame = Instance.new("Frame")
+pct_frame.Position = UDim2.new(1, -50, 0, 5)
+pct_frame.Size = UDim2.new(0, 45, 0, 25)
+pct_frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+pct_frame.BorderSizePixel = 0
+pct_frame.Name = "pct_frame"
+pct_frame.Parent = tp_panel
+
+local pct_corner = Instance.new("UICorner")
+pct_corner.Parent = pct_frame
+
+local pct_label = Instance.new("TextLabel")
+pct_label.Text = "90%"
+pct_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+pct_label.TextSize = 13
+pct_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+pct_label.Size = UDim2.new(1, 0, 1, 0)
+pct_label.BackgroundTransparency = 1
+pct_label.Name = "pct_label"
+pct_label.Parent = pct_frame
+
+-- Slider track
+local slider_track = Instance.new("Frame")
+slider_track.Position = UDim2.new(0.075, 0, 0.7, 0)
+slider_track.Size = UDim2.new(0.85, 0, 0, 6)
+slider_track.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+slider_track.BorderSizePixel = 0
+slider_track.Name = "slider_track"
+slider_track.Parent = tp_panel
+
+local track_corner = Instance.new("UICorner")
+track_corner.CornerRadius = UDim.new(1, 0)
+track_corner.Parent = slider_track
+
+-- Slider fill
+local slider_fill = Instance.new("Frame")
+slider_fill.Size = UDim2.new(0.9, 0, 1, 0)
+slider_fill.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+slider_fill.BorderSizePixel = 0
+slider_fill.Name = "slider_fill"
+slider_fill.Parent = slider_track
+
+local fill_corner = Instance.new("UICorner")
+fill_corner.CornerRadius = UDim.new(1, 0)
+fill_corner.Parent = slider_fill
+
+-- Slider handle (image button acting as drag handle)
+local slider_handle = Instance.new("ImageButton")
+slider_handle.Image = "rbxassetid://6023426923"
+slider_handle.ImageTransparency = 0.2
+slider_handle.Position = UDim2.new(0.9, -10, 0.5, -10)
+slider_handle.Size = UDim2.new(0, 20, 0, 20)
+slider_handle.BackgroundTransparency = 1
+slider_handle.Name = "slider_handle"
+slider_handle.Parent = slider_track
+
+-- dead: no real slider dragging logic
+slider_handle.MouseButton1Click:Connect(function()
+	-- placeholder; no real behavior
+end)
+end
+task.wait(1)
+do
+-- // Helper GUI (stopskidding)
+-- // Clean rewrite from table-based format
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Helper: flash background on action buttons
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = Color3.fromRGB(40, 40, 40) }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // GUI Root
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "stopskidding"
+screen_gui.Parent = player_gui
+
+-- ============================================================
+-- // Main Frame
+-- ============================================================
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0, 20, 0.5, -75)
+main_frame.Size = UDim2.new(0, 160, 0, 150)
+main_frame.BackgroundColor3 = Color3.fromRGB(8, 8, 8)
+main_frame.BorderSizePixel = 0
+main_frame.Name = "main_frame"
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 12)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.Color = Color3.fromRGB(30, 30, 30)
+main_stroke.Parent = main_frame
+
+-- ============================================================
+-- // Title
+-- ============================================================
+local title_label = Instance.new("TextLabel")
+title_label.Text = "              HELPER"
+title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_label.TextSize = 14
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 5, 0, 5)
+title_label.Size = UDim2.new(1, -10, 0, 25)
+title_label.BackgroundTransparency = 1
+title_label.Name = "title_label"
+title_label.Parent = main_frame
+
+-- // Drag via title
+local dragging, drag_start, frame_start = false, nil, nil
+
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		frame_start = main_frame.Position
+	end
+end)
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			frame_start.X.Scale, frame_start.X.Offset + delta.X,
+			frame_start.Y.Scale, frame_start.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- ============================================================
+-- // Content holder
+-- ============================================================
+local content_holder = Instance.new("Frame")
+content_holder.Position = UDim2.new(0, 0, 0, 30)
+content_holder.Size = UDim2.new(1, 0, 1, -30)
+content_holder.BackgroundTransparency = 1
+content_holder.Name = "content_holder"
+content_holder.Parent = main_frame
+
+-- // Helper to make a simple action button
+local function make_action_btn(parent, text, pos_y, width, offset_x)
+	local btn = Instance.new("TextButton")
+	btn.Text = text
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.TextSize = 13
+	btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+	btn.Position = UDim2.new(0.5, offset_x or -70, 0, pos_y)
+	btn.Size = UDim2.new(0, width or 140, 0, 25)
+	btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	btn.BackgroundTransparency = 0.3
+	btn.BorderSizePixel = 0
+	btn.Parent = parent
+
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 6)
+	corner.Parent = btn
+
+	btn.MouseButton1Click:Connect(function()
+		flash_button(btn)
+		-- dead: no real logic
+	end)
+
+	return btn
+end
+
+-- ============================================================
+-- // Buttons
+-- ============================================================
+local rejoin_btn    = make_action_btn(content_holder, "REJOIN",    5)
+local kick_self_btn = make_action_btn(content_holder, "KICK SELF", 35)
+
+-- ALIGN and [V] side by side
+local align_btn = make_action_btn(content_holder, "ALIGN", 65, 88, -70)
+
+local v_btn = Instance.new("TextButton")
+v_btn.Text = "[V]"
+v_btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+v_btn.TextSize = 11
+v_btn.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+v_btn.Position = UDim2.new(0, 104, 0, 95)
+v_btn.Size = UDim2.new(0, 46, 0, 25)
+v_btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+v_btn.BackgroundTransparency = 0.3
+v_btn.BorderSizePixel = 0
+v_btn.Name = "v_btn"
+v_btn.Parent = main_frame
+
+local v_corner = Instance.new("UICorner")
+v_corner.CornerRadius = UDim.new(0, 6)
+v_corner.Parent = v_btn
+
+local v_stroke = Instance.new("UIStroke")
+v_stroke.Color = Color3.fromRGB(40, 40, 40)
+v_stroke.Parent = v_btn
+
+v_btn.MouseButton1Click:Connect(function()
+	flash_button(v_btn)
+	-- dead: no real logic
+end)
+end
+task.wait(1)
+do
+-- // Speed Booster GUI
+-- // discord.gg/tokinu
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // State
+local speed_enabled = false
+
+-- // Utility
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1), { BackgroundColor3 = Color3.fromRGB(160, 160, 190) }):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15), { BackgroundColor3 = original }):Play()
+	end)
+end
+
+-- // GUI
+local speed_gui = Instance.new("ScreenGui")
+speed_gui.Name = "SpeedBoosterGUI"
+speed_gui.Parent = player_gui
+
+-- // Main Frame
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(1, -190, 0, 10)
+main_frame.Size = UDim2.new(0, 180, 0, 150)
+main_frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+main_frame.BackgroundTransparency = 0.2
+main_frame.Parent = speed_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 12)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.Color = Color3.fromRGB(180, 180, 200)
+main_stroke.Transparency = 0.7
+main_stroke.Parent = main_frame
+
+-- // Title Label
+local title_label = Instance.new("TextLabel")
+title_label.Text = "Speed Booster"
+title_label.TextColor3 = Color3.fromRGB(220, 220, 240)
+title_label.TextSize = 16
+title_label.Font = Enum.Font.GothamMedium
+title_label.Position = UDim2.new(0, 0, 0, 8)
+title_label.Size = UDim2.new(1, 0, 0, 28)
+title_label.BackgroundTransparency = 1
+title_label.Parent = main_frame
+
+-- // Discord Label
+local discord_label = Instance.new("TextLabel")
+discord_label.Text = "discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(180, 180, 200)
+discord_label.TextSize = 12
+discord_label.Font = Enum.Font.Gotham
+discord_label.Position = UDim2.new(0, 10, 0, 32)
+discord_label.Size = UDim2.new(1, -20, 0, 16)
+discord_label.BackgroundTransparency = 1
+discord_label.Parent = main_frame
+
+-- // Input Container
+local input_frame = Instance.new("Frame")
+input_frame.Position = UDim2.new(0, 10, 0, 55)
+input_frame.Size = UDim2.new(1, -20, 0, 50)
+input_frame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+input_frame.BackgroundTransparency = 0.3
+input_frame.Parent = main_frame
+
+local input_corner = Instance.new("UICorner")
+input_corner.Parent = input_frame
+
+local input_stroke = Instance.new("UIStroke")
+input_stroke.Color = Color3.fromRGB(180, 180, 200)
+input_stroke.Transparency = 0.7
+input_stroke.Parent = input_frame
+
+-- // Speed Value Label
+local speed_value_label = Instance.new("TextLabel")
+speed_value_label.Text = "Speed Value:"
+speed_value_label.TextColor3 = Color3.fromRGB(220, 220, 240)
+speed_value_label.TextSize = 12
+speed_value_label.Font = Enum.Font.Gotham
+speed_value_label.TextXAlignment = Enum.TextXAlignment.Left
+speed_value_label.Position = UDim2.new(0, 5, 0, 5)
+speed_value_label.Size = UDim2.new(1, -10, 0, 18)
+speed_value_label.BackgroundTransparency = 1
+speed_value_label.Parent = input_frame
+
+-- // Speed TextBox
+local speed_textbox = Instance.new("TextBox")
+speed_textbox.Text = "53"
+speed_textbox.TextColor3 = Color3.fromRGB(240, 240, 255)
+speed_textbox.TextSize = 14
+speed_textbox.Font = Enum.Font.Gotham
+speed_textbox.PlaceholderText = "Enter speed"
+speed_textbox.PlaceholderColor3 = Color3.fromRGB(180, 180, 200)
+speed_textbox.Position = UDim2.new(0, 5, 0, 25)
+speed_textbox.Size = UDim2.new(1, -10, 0, 22)
+speed_textbox.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+speed_textbox.BackgroundTransparency = 0.4
+speed_textbox.Parent = input_frame
+
+local textbox_corner = Instance.new("UICorner")
+textbox_corner.CornerRadius = UDim.new(0, 6)
+textbox_corner.Parent = speed_textbox
+
+-- // Toggle Button
+local toggle_button = Instance.new("TextButton")
+toggle_button.Text = "Speed: OFF\n F To Toggle"
+toggle_button.TextColor3 = Color3.fromRGB(240, 240, 255)
+toggle_button.TextSize = 14
+toggle_button.Font = Enum.Font.GothamMedium
+toggle_button.Position = UDim2.new(0, 10, 0, 112)
+toggle_button.Size = UDim2.new(1, -20, 0, 32)
+toggle_button.BackgroundColor3 = Color3.fromRGB(100, 100, 120)
+toggle_button.BackgroundTransparency = 0.5
+toggle_button.Parent = main_frame
+
+local toggle_corner = Instance.new("UICorner")
+toggle_corner.Parent = toggle_button
+
+local toggle_stroke = Instance.new("UIStroke")
+toggle_stroke.Color = Color3.fromRGB(200, 200, 220)
+toggle_stroke.Transparency = 0.6
+toggle_stroke.Parent = toggle_button
+
+-- // Drag
+local dragging, drag_start, start_pos
+main_frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		start_pos = main_frame.Position
+	end
+end)
+main_frame.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			start_pos.X.Scale, start_pos.X.Offset + delta.X,
+			start_pos.Y.Scale, start_pos.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- // Toggle Logic
+local function set_speed_state(enabled)
+	speed_enabled = enabled
+	if enabled then
+		toggle_button.Text = "Speed: ON\n F To Toggle"
+		tween_service:Create(toggle_button, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(80, 120, 160)
+		}):Play()
+	else
+		toggle_button.Text = "Speed: OFF\n F To Toggle"
+		tween_service:Create(toggle_button, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(100, 100, 120)
+		}):Play()
+	end
+end
+
+toggle_button.MouseButton1Click:Connect(function()
+	flash_button(toggle_button)
+	set_speed_state(not speed_enabled)
+end)
+
+user_input.InputBegan:Connect(function(input, gpe)
+	if gpe then return end
+	if input.KeyCode == Enum.KeyCode.F then
+		set_speed_state(not speed_enabled)
+	end
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub GUI
+-- // discord.gg/tokinu
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // Utility: quick background flash on click
+local function flash_button(btn)
+	local original = btn.BackgroundColor3
+	tween_service:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Quad), {
+		BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	}):Play()
+	task.delay(0.15, function()
+		tween_service:Create(btn, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {
+			BackgroundColor3 = original
+		}):Play()
+	end)
+end
+
+-- // GUI
+local tokinu_hub_gui = Instance.new("ScreenGui")
+tokinu_hub_gui.Name = "TokinuHub"
+tokinu_hub_gui.Parent = player_gui
+
+-- // Main Frame
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0, 40, 0, 60)
+main_frame.Size = UDim2.new(0, 260, 0, 175)
+main_frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+main_frame.BackgroundTransparency = 0.4
+main_frame.Parent = tokinu_hub_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 14)
+main_corner.Parent = main_frame
+
+-- // Logo Image
+local logo_image = Instance.new("ImageLabel")
+logo_image.Image = "http://www.roblox.com/asset/?id=18347450507"
+logo_image.ScaleType = Enum.ScaleType.Fit
+logo_image.Position = UDim2.new(0, 12, 0, 8)
+logo_image.Size = UDim2.new(0, 38, 0, 38)
+logo_image.BackgroundTransparency = 1
+logo_image.Parent = main_frame
+
+-- // Title Label
+local title_label = Instance.new("TextLabel")
+title_label.Text = "Tokinu Hub"
+title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+title_label.TextSize = 19
+title_label.Font = Enum.Font.GothamBold
+title_label.Position = UDim2.new(0, 10, 0, 8)
+title_label.Size = UDim2.new(1, -20, 0, 32)
+title_label.BackgroundTransparency = 1
+title_label.Parent = main_frame
+
+-- // Invis Cloner Button
+local invis_cloner_button = Instance.new("TextButton")
+invis_cloner_button.Text = "invis cloner"
+invis_cloner_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+invis_cloner_button.TextSize = 22
+invis_cloner_button.Font = Enum.Font.GothamBold
+invis_cloner_button.TextWrapped = true
+invis_cloner_button.Position = UDim2.new(0, 15, 0.5, -45)
+invis_cloner_button.Size = UDim2.new(1, -30, 0, 70)
+invis_cloner_button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+invis_cloner_button.BackgroundTransparency = 0.3
+invis_cloner_button.Parent = main_frame
+
+local invis_cloner_corner = Instance.new("UICorner")
+invis_cloner_corner.CornerRadius = UDim.new(0, 12)
+invis_cloner_corner.Parent = invis_cloner_button
+
+local invis_cloner_gradient = Instance.new("UIGradient")
+invis_cloner_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 40, 40)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 60, 60)),
+})
+invis_cloner_gradient.Rotation = 90
+invis_cloner_gradient.Parent = invis_cloner_button
+
+-- // Subtle gradient rotation animation
+task.spawn(function()
+	local rot = 90
+	while task.wait(0.05) do
+		rot = (rot + 0.5) % 360
+		invis_cloner_gradient.Rotation = rot
+	end
+end)
+
+-- // Discord Label
+local discord_label = Instance.new("TextLabel")
+discord_label.Text = "discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(200, 200, 200)
+discord_label.TextSize = 13
+discord_label.Font = Enum.Font.Gotham
+discord_label.Position = UDim2.new(0, 15, 0, 130)
+discord_label.Size = UDim2.new(1, -30, 0, 20)
+discord_label.BackgroundTransparency = 1
+discord_label.Parent = main_frame
+
+-- // Drag
+local dragging, drag_start, start_pos
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		start_pos = main_frame.Position
+	end
+end)
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			start_pos.X.Scale, start_pos.X.Offset + delta.X,
+			start_pos.Y.Scale, start_pos.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- // Button Connections (dead function - flash only)
+invis_cloner_button.MouseButton1Click:Connect(function()
+	flash_button(invis_cloner_button)
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub | Lagger GUI
+-- // discord.gg/tokinu
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local user_input = game:GetService("UserInputService")
+local local_player = players.LocalPlayer
+local player_gui = local_player:WaitForChild("PlayerGui")
+
+-- // State
+local lag_enabled = false
+local speed_enabled = false
+local is_minimized = false
+local full_height = 205
+
+-- // Gradient color helper for UIStroke gradients (blue shimmer used throughout)
+local function make_stroke_gradient(stroke)
+	local g = Instance.new("UIGradient")
+	g.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0,   Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)),
+		ColorSequenceKeypoint.new(1,   Color3.fromRGB(0, 0, 0)),
+	})
+	g.Parent = stroke
+	return g
+end
+
+-- // Toggle slide animation helper
+local function set_toggle_visual(toggle_track, toggle_dot, enabled)
+	local dot_on_pos  = UDim2.new(1, -16, 0.5, -7)
+	local dot_off_pos = UDim2.new(0,   2, 0.5, -7)
+	local track_on_color  = Color3.fromRGB(40, 80, 180)
+	local track_off_color = Color3.fromRGB(19, 29, 49)
+
+	tween_service:Create(toggle_dot, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+		Position = enabled and dot_on_pos or dot_off_pos
+	}):Play()
+	tween_service:Create(toggle_track, TweenInfo.new(0.15), {
+		BackgroundColor3 = enabled and track_on_color or track_off_color
+	}):Play()
+end
+
+-- // GUI
+local lagger_gui = Instance.new("ScreenGui")
+lagger_gui.Name = "TokinuHubLagger"
+lagger_gui.Parent = player_gui
+
+-- // Main Frame
+local main_frame = Instance.new("Frame")
+main_frame.Position = UDim2.new(0, 30, 0, 137)
+main_frame.Size = UDim2.new(0, 190, 0, full_height)
+main_frame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+main_frame.BackgroundTransparency = 0.4
+main_frame.ClipsDescendants = true
+main_frame.Parent = lagger_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 10)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+main_stroke.Color = Color3.fromRGB(40, 80, 180)
+main_stroke.Thickness = 2
+main_stroke.Parent = main_frame
+make_stroke_gradient(main_stroke).Rotation = 227.1
+
+-- // Title Label
+local title_label = Instance.new("TextLabel")
+title_label.Text = "     Tokinu Hub | Lagger"
+title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
+title_label.TextSize = 14
+title_label.Font = Enum.Font.GothamBlack
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 10, 0, 5)
+title_label.Size = UDim2.new(1, -40, 0, 20)
+title_label.BackgroundTransparency = 1
+title_label.Parent = main_frame
+
+local title_gradient = Instance.new("UIGradient")
+title_gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0,    Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(0.35, Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(0.5,  Color3.fromRGB(200, 220, 255)),
+	ColorSequenceKeypoint.new(0.65, Color3.fromRGB(60, 100, 200)),
+	ColorSequenceKeypoint.new(1,    Color3.fromRGB(60, 100, 200)),
+})
+title_gradient.Offset = Vector2.new(-1.444, 0)
+title_gradient.Parent = title_label
+
+-- // Shimmer animation on title
+task.spawn(function()
+	while task.wait(0.04) do
+		local ox = title_gradient.Offset.X + 0.02
+		if ox > 1.5 then ox = -1.5 end
+		title_gradient.Offset = Vector2.new(ox, 0)
+	end
+end)
+
+-- // Discord Label
+local discord_label = Instance.new("TextLabel")
+discord_label.Text = "            discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+discord_label.TextTransparency = 0.3
+discord_label.TextSize = 11
+discord_label.Font = Enum.Font.GothamMedium
+discord_label.TextXAlignment = Enum.TextXAlignment.Left
+discord_label.Position = UDim2.new(0, 10, 0, 23)
+discord_label.Size = UDim2.new(1, -40, 0, 15)
+discord_label.BackgroundTransparency = 1
+discord_label.Parent = main_frame
+
+-- // Minimize Button
+local minimize_button = Instance.new("TextButton")
+minimize_button.Text = "-"
+minimize_button.TextColor3 = Color3.fromRGB(100, 150, 255)
+minimize_button.TextSize = 14
+minimize_button.Font = Enum.Font.GothamBlack
+minimize_button.Position = UDim2.new(1, -32, 0, 8)
+minimize_button.Size = UDim2.new(0, 24, 0, 24)
+minimize_button.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+minimize_button.Parent = main_frame
+
+local minimize_corner = Instance.new("UICorner")
+minimize_corner.CornerRadius = UDim.new(0, 6)
+minimize_corner.Parent = minimize_button
+
+local minimize_stroke = Instance.new("UIStroke")
+minimize_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+minimize_stroke.Color = Color3.fromRGB(40, 80, 180)
+minimize_stroke.Thickness = 2
+minimize_stroke.Parent = minimize_button
+
+-- // Content wrapper (everything below header fades in/out on minimize)
+local content_frame = Instance.new("Frame")
+content_frame.Position = UDim2.new(0, 0, 0, 44)
+content_frame.Size = UDim2.new(1, 0, 1, -44)
+content_frame.BackgroundTransparency = 1
+content_frame.Parent = main_frame
+
+-- // ── LAG ROW ──────────────────────────────────────────────
+
+local lag_row = Instance.new("Frame")
+lag_row.Position = UDim2.new(0, 10, 0, 4)
+lag_row.Size = UDim2.new(1, -20, 0, 30)
+lag_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+lag_row.Parent = content_frame
+
+local lag_row_corner = Instance.new("UICorner")
+lag_row_corner.Parent = lag_row
+
+local lag_row_stroke = Instance.new("UIStroke")
+lag_row_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lag_row_stroke.Color = Color3.fromRGB(40, 80, 180)
+lag_row_stroke.Thickness = 1.5
+lag_row_stroke.Parent = lag_row
+make_stroke_gradient(lag_row_stroke).Rotation = 151.4
+
+local lag_status_label = Instance.new("TextLabel")
+lag_status_label.Text = "Lag: OFF"
+lag_status_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+lag_status_label.TextSize = 12
+lag_status_label.Font = Enum.Font.GothamBlack
+lag_status_label.TextXAlignment = Enum.TextXAlignment.Left
+lag_status_label.Position = UDim2.new(0, 10, 0, 0)
+lag_status_label.Size = UDim2.new(1, -60, 1, 0)
+lag_status_label.BackgroundTransparency = 1
+lag_status_label.Parent = lag_row
+
+-- // Lag Toggle Track
+local lag_toggle_track = Instance.new("Frame")
+lag_toggle_track.Position = UDim2.new(1, -46, 0.5, -9)
+lag_toggle_track.Size = UDim2.new(0, 36, 0, 18)
+lag_toggle_track.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+lag_toggle_track.BackgroundTransparency = 0
+lag_toggle_track.Parent = lag_row
+
+local lag_track_corner = Instance.new("UICorner")
+lag_track_corner.CornerRadius = UDim.new(0, 9)
+lag_track_corner.Parent = lag_toggle_track
+
+local lag_track_stroke = Instance.new("UIStroke")
+lag_track_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lag_track_stroke.Color = Color3.fromRGB(40, 80, 180)
+lag_track_stroke.Thickness = 2
+lag_track_stroke.Parent = lag_toggle_track
+make_stroke_gradient(lag_track_stroke).Rotation = 227.1
+
+-- // Lag Toggle Dot
+local lag_toggle_dot = Instance.new("Frame")
+lag_toggle_dot.Position = UDim2.new(0, 2, 0.5, -7)
+lag_toggle_dot.Size = UDim2.new(0, 14, 0, 14)
+lag_toggle_dot.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+lag_toggle_dot.Parent = lag_toggle_track
+
+local lag_dot_corner = Instance.new("UICorner")
+lag_dot_corner.CornerRadius = UDim.new(0, 7)
+lag_dot_corner.Parent = lag_toggle_dot
+
+-- // Invisible click region over lag row
+local lag_click = Instance.new("TextButton")
+lag_click.Text = ""
+lag_click.Size = UDim2.new(1, 0, 1, 0)
+lag_click.BackgroundTransparency = 1
+lag_click.Parent = lag_row
+
+-- // ── LAG SLIDER ROW ──────────────────────────────────────
+
+local lag_slider_row = Instance.new("Frame")
+lag_slider_row.Position = UDim2.new(0, 10, 0, 40)
+lag_slider_row.Size = UDim2.new(1, -20, 0, 34)
+lag_slider_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+lag_slider_row.Parent = content_frame
+
+local lag_slider_corner = Instance.new("UICorner")
+lag_slider_corner.Parent = lag_slider_row
+
+local lag_slider_stroke = Instance.new("UIStroke")
+lag_slider_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lag_slider_stroke.Color = Color3.fromRGB(40, 80, 180)
+lag_slider_stroke.Thickness = 1.5
+lag_slider_stroke.Parent = lag_slider_row
+make_stroke_gradient(lag_slider_stroke).Rotation = 151.4
+
+local lag_percent_label = Instance.new("TextLabel")
+lag_percent_label.Text = "Lag: 0%"
+lag_percent_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+lag_percent_label.TextSize = 11
+lag_percent_label.Font = Enum.Font.GothamBlack
+lag_percent_label.TextXAlignment = Enum.TextXAlignment.Left
+lag_percent_label.Position = UDim2.new(0, 8, 0, 0)
+lag_percent_label.Size = UDim2.new(0, 55, 1, 0)
+lag_percent_label.BackgroundTransparency = 1
+lag_percent_label.Parent = lag_slider_row
+
+local lag_track_bg = Instance.new("Frame")
+lag_track_bg.Position = UDim2.new(0, 65, 0.5, -6)
+lag_track_bg.Size = UDim2.new(1, -73, 0, 12)
+lag_track_bg.BackgroundColor3 = Color3.fromRGB(40, 50, 70)
+lag_track_bg.Parent = lag_slider_row
+
+local lag_track_bg_corner = Instance.new("UICorner")
+lag_track_bg_corner.CornerRadius = UDim.new(0, 6)
+lag_track_bg_corner.Parent = lag_track_bg
+
+local lag_fill_bar = Instance.new("Frame")
+lag_fill_bar.Size = UDim2.new(0, 0, 1, 0)
+lag_fill_bar.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+lag_fill_bar.Parent = lag_track_bg
+
+local lag_fill_corner = Instance.new("UICorner")
+lag_fill_corner.CornerRadius = UDim.new(0, 6)
+lag_fill_corner.Parent = lag_fill_bar
+
+local lag_slider_handle = Instance.new("Frame")
+lag_slider_handle.Position = UDim2.new(0, 0, 0.5, 0)
+lag_slider_handle.Size = UDim2.new(0, 14, 0, 14)
+lag_slider_handle.AnchorPoint = Vector2.new(0.5, 0.5)
+lag_slider_handle.BackgroundColor3 = Color3.fromRGB(20, 50, 160)
+lag_slider_handle.Parent = lag_track_bg
+
+local lag_handle_corner = Instance.new("UICorner")
+lag_handle_corner.CornerRadius = UDim.new(1, 0)
+lag_handle_corner.Parent = lag_slider_handle
+
+-- // ── SPEED ROW ────────────────────────────────────────────
+
+local speed_row = Instance.new("Frame")
+speed_row.Position = UDim2.new(0, 10, 0, 84)
+speed_row.Size = UDim2.new(1, -20, 0, 30)
+speed_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speed_row.Parent = content_frame
+
+local speed_row_corner = Instance.new("UICorner")
+speed_row_corner.Parent = speed_row
+
+local speed_row_stroke = Instance.new("UIStroke")
+speed_row_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speed_row_stroke.Color = Color3.fromRGB(40, 80, 180)
+speed_row_stroke.Thickness = 1.5
+speed_row_stroke.Parent = speed_row
+make_stroke_gradient(speed_row_stroke).Rotation = 151.4
+
+local speed_status_label = Instance.new("TextLabel")
+speed_status_label.Text = "Speed: OFF"
+speed_status_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+speed_status_label.TextSize = 12
+speed_status_label.Font = Enum.Font.GothamBlack
+speed_status_label.TextXAlignment = Enum.TextXAlignment.Left
+speed_status_label.Position = UDim2.new(0, 10, 0, 0)
+speed_status_label.Size = UDim2.new(1, -60, 1, 0)
+speed_status_label.BackgroundTransparency = 1
+speed_status_label.Parent = speed_row
+
+-- // Speed Toggle Track
+local speed_toggle_track = Instance.new("Frame")
+speed_toggle_track.Position = UDim2.new(1, -46, 0.5, -9)
+speed_toggle_track.Size = UDim2.new(0, 36, 0, 18)
+speed_toggle_track.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+speed_toggle_track.Parent = speed_row
+
+local speed_track_corner = Instance.new("UICorner")
+speed_track_corner.CornerRadius = UDim.new(0, 9)
+speed_track_corner.Parent = speed_toggle_track
+
+local speed_track_stroke = Instance.new("UIStroke")
+speed_track_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speed_track_stroke.Color = Color3.fromRGB(40, 80, 180)
+speed_track_stroke.Thickness = 2
+speed_track_stroke.Parent = speed_toggle_track
+make_stroke_gradient(speed_track_stroke).Rotation = 227.1
+
+-- // Speed Toggle Dot
+local speed_toggle_dot = Instance.new("Frame")
+speed_toggle_dot.Position = UDim2.new(0, 2, 0.5, -7)
+speed_toggle_dot.Size = UDim2.new(0, 14, 0, 14)
+speed_toggle_dot.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+speed_toggle_dot.Parent = speed_toggle_track
+
+local speed_dot_corner = Instance.new("UICorner")
+speed_dot_corner.CornerRadius = UDim.new(0, 7)
+speed_dot_corner.Parent = speed_toggle_dot
+
+local speed_click = Instance.new("TextButton")
+speed_click.Text = ""
+speed_click.Size = UDim2.new(1, 0, 1, 0)
+speed_click.BackgroundTransparency = 1
+speed_click.Parent = speed_row
+
+-- // ── SPEED SLIDER ROW ─────────────────────────────────────
+
+local speed_slider_row = Instance.new("Frame")
+speed_slider_row.Position = UDim2.new(0, 10, 0, 120)
+speed_slider_row.Size = UDim2.new(1, -20, 0, 34)
+speed_slider_row.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speed_slider_row.Parent = content_frame
+
+local speed_slider_corner = Instance.new("UICorner")
+speed_slider_corner.Parent = speed_slider_row
+
+local speed_slider_stroke = Instance.new("UIStroke")
+speed_slider_stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speed_slider_stroke.Color = Color3.fromRGB(40, 80, 180)
+speed_slider_stroke.Thickness = 1.5
+speed_slider_stroke.Parent = speed_slider_row
+make_stroke_gradient(speed_slider_stroke).Rotation = 151.4
+
+local speed_value_label = Instance.new("TextLabel")
+speed_value_label.Text = "Speed: 20"
+speed_value_label.TextColor3 = Color3.fromRGB(150, 180, 255)
+speed_value_label.TextSize = 11
+speed_value_label.Font = Enum.Font.GothamBlack
+speed_value_label.TextXAlignment = Enum.TextXAlignment.Left
+speed_value_label.Position = UDim2.new(0, 8, 0, 0)
+speed_value_label.Size = UDim2.new(0, 60, 1, 0)
+speed_value_label.BackgroundTransparency = 1
+speed_value_label.Parent = speed_slider_row
+
+local speed_track_bg = Instance.new("Frame")
+speed_track_bg.Position = UDim2.new(0, 68, 0.5, -6)
+speed_track_bg.Size = UDim2.new(1, -76, 0, 12)
+speed_track_bg.BackgroundColor3 = Color3.fromRGB(40, 50, 70)
+speed_track_bg.Parent = speed_slider_row
+
+local speed_track_bg_corner = Instance.new("UICorner")
+speed_track_bg_corner.CornerRadius = UDim.new(0, 6)
+speed_track_bg_corner.Parent = speed_track_bg
+
+local speed_fill_bar = Instance.new("Frame")
+speed_fill_bar.Size = UDim2.new(0, 0, 1, 0)
+speed_fill_bar.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+speed_fill_bar.Parent = speed_track_bg
+
+local speed_fill_corner = Instance.new("UICorner")
+speed_fill_corner.CornerRadius = UDim.new(0, 6)
+speed_fill_corner.Parent = speed_fill_bar
+
+local speed_slider_handle = Instance.new("Frame")
+speed_slider_handle.Position = UDim2.new(0, 0, 0.5, 0)
+speed_slider_handle.Size = UDim2.new(0, 14, 0, 14)
+speed_slider_handle.AnchorPoint = Vector2.new(0.5, 0.5)
+speed_slider_handle.BackgroundColor3 = Color3.fromRGB(20, 50, 160)
+speed_slider_handle.Parent = speed_track_bg
+
+local speed_handle_corner = Instance.new("UICorner")
+speed_handle_corner.CornerRadius = UDim.new(1, 0)
+speed_handle_corner.Parent = speed_slider_handle
+
+-- // ── DRAG ─────────────────────────────────────────────────
+
+local dragging, drag_start, start_pos
+title_label.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		drag_start = input.Position
+		start_pos = main_frame.Position
+	end
+end)
+title_label.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+user_input.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - drag_start
+		main_frame.Position = UDim2.new(
+			start_pos.X.Scale, start_pos.X.Offset + delta.X,
+			start_pos.Y.Scale, start_pos.Y.Offset + delta.Y
+		)
+	end
+end)
+
+-- // ── MINIMIZE ─────────────────────────────────────────────
+
+minimize_button.MouseButton1Click:Connect(function()
+	is_minimized = not is_minimized
+	local target_height = is_minimized and 44 or full_height
+	local target_transparency = is_minimized and 1 or 0
+
+	tween_service:Create(main_frame, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+		Size = UDim2.new(0, 190, 0, target_height)
+	}):Play()
+	tween_service:Create(content_frame, TweenInfo.new(0.15), {
+		GroupTransparency = target_transparency
+	}):Play()
+
+	minimize_button.Text = is_minimized and "+" or "-"
+end)
+
+-- // ── TOGGLE LOGIC ─────────────────────────────────────────
+
+lag_click.MouseButton1Click:Connect(function()
+	lag_enabled = not lag_enabled
+	lag_status_label.Text = lag_enabled and "Lag: ON" or "Lag: OFF"
+	set_toggle_visual(lag_toggle_track, lag_toggle_dot, lag_enabled)
+end)
+
+speed_click.MouseButton1Click:Connect(function()
+	speed_enabled = not speed_enabled
+	speed_status_label.Text = speed_enabled and "Speed: ON" or "Speed: OFF"
+	set_toggle_visual(speed_toggle_track, speed_toggle_dot, speed_enabled)
+end)
+end
+task.wait(1)
+do
+-- // Performance Tracker
+-- // Clean rewrite by hand
+
+local players = game:GetService("Players")
+local local_player = players.LocalPlayer
+
+-- // Services
+local tween_service = game:GetService("TweenService")
+local run_service = game:GetService("RunService")
+
+-- // GUI Setup
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "PerformanceTracker"
+screen_gui.ResetOnSpawn = false
+screen_gui.Parent = local_player:WaitForChild("PlayerGui")
+
+-- // Main Bar
+local main_frame = Instance.new("Frame")
+main_frame.Name = "MainFrame"
+main_frame.Position = UDim2.new(0.5, -200, 0, 0)
+main_frame.Size = UDim2.new(0, 400, 0, 36)
+main_frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+main_frame.BorderSizePixel = 0
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 6)
+main_corner.Parent = main_frame
+
+-- // Particle/Decoration Layer (clipped background dots)
+local particle_container = Instance.new("Frame")
+particle_container.Name = "ParticleContainer"
+particle_container.Size = UDim2.new(0.5, 0, 1, 0)
+particle_container.BackgroundTransparency = 1
+particle_container.ClipsDescendants = true
+particle_container.Parent = main_frame
+
+-- // Helper to create the small decorative dot particles
+local function make_particle(parent, pos_x, pos_y, size, color, transparency)
+    local dot = Instance.new("Frame")
+    dot.Name = "Particle"
+    dot.Position = UDim2.new(pos_x, 0, pos_y, 0)
+    dot.Size = UDim2.new(0, size, 0, size)
+    dot.BackgroundColor3 = color
+    dot.BackgroundTransparency = transparency
+    dot.BorderSizePixel = 0
+    dot.Parent = parent
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(1, 0)
+    corner.Parent = dot
+
+    return dot
+end
+
+-- // Decorative particles (preserved 1:1 from original)
+make_particle(particle_container, 0.46461, 0.08775, 1, Color3.fromRGB(198, 172, 129), 0.13822)
+make_particle(particle_container, 0.33031, 0.46808, 1, Color3.fromRGB(229, 226, 2),   0.21862)
+make_particle(particle_container, 0.33271, 0.01174, 1, Color3.fromRGB(221, 175, 156), 0.48578)
+make_particle(particle_container, 0.61507, 0.58043, 2, Color3.fromRGB(161, 171, 37),  0.47579)
+make_particle(particle_container, 0.32048, 0.07709, 2, Color3.fromRGB(150, 235, 156), 0.17014)
+make_particle(particle_container, 0.28011, 0.74600, 1, Color3.fromRGB(155, 226, 111), 0.12553)
+make_particle(particle_container, 1.09721, 1.09025, 1, Color3.fromRGB(195, 150, 218), 0.31040)
+make_particle(particle_container, 0.74524, 0.16760, 2, Color3.fromRGB(232, 197, 134), 0.39682)
+make_particle(particle_container, 0.86792, 0.53912, 1, Color3.fromRGB(119, 221, 176), 0.21465)
+make_particle(particle_container, 0.05826, 0.52632, 2, Color3.fromRGB(197, 215, 243), 0.08442)
+make_particle(particle_container, 0.09031, 0.88175, 1, Color3.fromRGB(241, 196, 196), 0.43293)
+make_particle(particle_container, 0.44668, 0.59523, 1, Color3.fromRGB(248, 237, 174), 0.24510)
+make_particle(particle_container, 0.63583, 0.72716, 2, Color3.fromRGB(174, 214, 241), 0.15686)
+make_particle(particle_container, 0.10395, 0.21795, 1, Color3.fromRGB(249, 168, 212), 0.47060)
+make_particle(particle_container, 0.84901, 0.94117, 1, Color3.fromRGB(187, 247, 208), 0.31373)
+make_particle(particle_container, 0.78431, 0.35294, 2, Color3.fromRGB(253, 230, 138), 0.11765)
+make_particle(particle_container, 0.57516, 0.47058, 1, Color3.fromRGB(196, 181, 253), 0.35294)
+make_particle(particle_container, 0.92156, 0.11764, 1, Color3.fromRGB(167, 243, 208), 0.50980)
+make_particle(particle_container, 0.15686, 0.64705, 2, Color3.fromRGB(254, 202, 202), 0.23529)
+make_particle(particle_container, 0.68627, 0.05882, 1, Color3.fromRGB(221, 214, 254), 0.17647)
+make_particle(particle_container, 0.21743, 0.08040, 2, Color3.fromRGB(179, 207, 193), 0.23995)
+make_particle(particle_container, 0.73327, 1.15548, 2, Color3.fromRGB(206, 216, 171), 0.33261)
+make_particle(particle_container, 0.98136, 0.72162, 1, Color3.fromRGB(244, 244, 62),  0.49803)
+make_particle(particle_container, 0.64992, 0.29499, 1, Color3.fromRGB(227, 255, 207), 0.18940)
+make_particle(particle_container, 0.74165, 0.42665, 1, Color3.fromRGB(208, 234, 146), 0.49340)
+make_particle(particle_container, 0.47856, 0.37035, 2, Color3.fromRGB(169, 221, 130), 0.49803)
+make_particle(particle_container, 0.52948, 0.85724, 2, Color3.fromRGB(218, 209, 253), 0.18940)
+make_particle(particle_container, 0.19373, 0.14493, 1, Color3.fromRGB(170, 251, 67),  0.43293)
+make_particle(particle_container, 0.13716, 0.30830, 2, Color3.fromRGB(234, 204, 12),  0.43294)
+make_particle(particle_container, 1.02289, 0.66452, 2, Color3.fromRGB(213, 243, 75),  0.35547)
+make_particle(particle_container, 1.01207, 0.33062, 2, Color3.fromRGB(218, 174, 126), 0.49803)
+make_particle(particle_container, 0.56051, 0.08542, 1, Color3.fromRGB(253, 220, 181), 0.26268)
+
+-- // Labels
+local greeting_label = Instance.new("TextLabel")
+greeting_label.Name = "GreetingLabel"
+greeting_label.Text = "hi twin"
+greeting_label.TextColor3 = Color3.fromRGB(255, 255, 255)
+greeting_label.TextSize = 11
+greeting_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+greeting_label.TextXAlignment = Enum.TextXAlignment.Left
+greeting_label.Position = UDim2.new(0, 10, 0, 0)
+greeting_label.Size = UDim2.new(0, 110, 1, 0)
+greeting_label.BackgroundTransparency = 1
+greeting_label.Parent = main_frame
+
+local fps_label = Instance.new("TextLabel")
+fps_label.Name = "FpsLabel"
+fps_label.Text = "FPS: 61"
+fps_label.TextColor3 = Color3.fromRGB(0, 255, 150)
+fps_label.TextSize = 14
+fps_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+fps_label.TextXAlignment = Enum.TextXAlignment.Left
+fps_label.Position = UDim2.new(0, 130, 0, 0)
+fps_label.Size = UDim2.new(0, 90, 1, 0)
+fps_label.BackgroundTransparency = 1
+fps_label.Parent = main_frame
+
+local discord_label = Instance.new("TextLabel")
+discord_label.Name = "DiscordLabel"
+discord_label.Text = "discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(114, 137, 218)
+discord_label.TextSize = 13
+discord_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+discord_label.TextXAlignment = Enum.TextXAlignment.Left
+discord_label.Position = UDim2.new(0, 230, 0, 0)
+discord_label.Size = UDim2.new(0, 190, 1, 0)
+discord_label.BackgroundTransparency = 1
+discord_label.Parent = main_frame
+
+-- // Discord underline bar
+local discord_underline = Instance.new("Frame")
+discord_underline.Name = "DiscordUnderline"
+discord_underline.Position = UDim2.new(0, 230, 1, -2)
+discord_underline.Size = UDim2.new(0, 150, 0, 1)
+discord_underline.BackgroundColor3 = Color3.fromRGB(114, 137, 218)
+discord_underline.BackgroundTransparency = 0.3
+discord_underline.BorderSizePixel = 0
+discord_underline.Parent = main_frame
+
+-- // Live FPS counter
+run_service.RenderStepped:Connect(function()
+    local fps = math.floor(1 / run_service.RenderStepped:Wait() * 0 + 1 / 0.016)
+    -- lightweight estimation
+    fps_label.Text = "FPS: " .. tostring(math.floor(1 / (tick() - (tick() - 0.016))))
+end)
+
+-- // Simple FPS update using heartbeat delta
+local last_time = tick()
+run_service.Heartbeat:Connect(function(dt)
+    local fps = math.round(1 / dt)
+    fps_label.Text = "FPS: " .. tostring(fps)
+end)
+end
+task.wait(1)
+do
+-- // Tokinu Hub - Galaxy (Base Protector)
+-- // Clean rewrite by hand
+
+local players = game:GetService("Players")
+local tween_service = game:GetService("TweenService")
+local local_player = players.LocalPlayer
+
+-- // State
+local is_minimized = false
+
+-- // Screen GUI
+local screen_gui = Instance.new("ScreenGui")
+screen_gui.Name = "TokinuHubGalaxy"
+screen_gui.ResetOnSpawn = false
+screen_gui.Parent = local_player:WaitForChild("PlayerGui")
+
+-- // Main Frame
+local main_frame = Instance.new("Frame")
+main_frame.Name = "MainFrame"
+main_frame.Position = UDim2.new(0, 40, 0, 60)
+main_frame.Size = UDim2.new(0, 260, 0, 170)
+main_frame.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
+main_frame.BackgroundTransparency = 0.2
+main_frame.BorderSizePixel = 0
+main_frame.ClipsDescendants = true
+main_frame.Parent = screen_gui
+
+local main_corner = Instance.new("UICorner")
+main_corner.CornerRadius = UDim.new(0, 12)
+main_corner.Parent = main_frame
+
+local main_stroke = Instance.new("UIStroke")
+main_stroke.Color = Color3.fromRGB(120, 120, 255)
+main_stroke.Thickness = 1.8
+main_stroke.Transparency = 0.305
+main_stroke.Parent = main_frame
+
+-- // Background gradient
+local main_gradient = Instance.new("UIGradient")
+main_gradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 20, 20)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(5, 5, 10)),
+})
+main_gradient.Rotation = 45
+main_gradient.Parent = main_frame
+
+-- // Subtle gradient rotation animation
+local gradient_angle = 45
+game:GetService("RunService").Heartbeat:Connect(function(dt)
+    gradient_angle = gradient_angle + dt * 4
+    if gradient_angle > 360 then gradient_angle = 0 end
+    main_gradient.Rotation = gradient_angle
+end)
+
+-- // Star/particle container (clipped to frame)
+local star_container = Instance.new("Frame")
+star_container.Name = "StarContainer"
+star_container.Size = UDim2.new(1, 0, 1, 0)
+star_container.BackgroundTransparency = 1
+star_container.ClipsDescendants = true
+star_container.ZIndex = 1
+star_container.Parent = main_frame
+
+-- // Helper for decorative star dots
+local function make_star(parent, pos_x, pos_y, size, transparency)
+    local dot = Instance.new("Frame")
+    dot.Name = "Star"
+    dot.Position = UDim2.new(pos_x, 0, pos_y, 0)
+    dot.Size = UDim2.new(0, size, 0, size)
+    dot.BackgroundColor3 = Color3.fromRGB(180, 180, 255)
+    dot.BackgroundTransparency = transparency
+    dot.BorderSizePixel = 0
+    dot.ZIndex = 1
+    dot.Parent = parent
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, size)
+    corner.Parent = dot
+
+    return dot
+end
+
+-- // Star particles (preserved 1:1 from original)
+make_star(star_container, 0.09985, 0.62610, 2, 0.06346)
+make_star(star_container, 0.17831, 0.95712, 1, 0.25387)
+make_star(star_container, 0.68824, 0.78457, 1, 0.01986)
+make_star(star_container, 1.03473, 1.07007, 2, 0.20543)
+make_star(star_container, 0.52236, 0.78047, 2, 0.25025)
+make_star(star_container, 0.28252, 0.41764, 2, 0.04911)
+make_star(star_container, 0.40396, 0.95214, 2, 0.32649)
+make_star(star_container, 0.39340, 0.52078, 2, 0.14706)
+make_star(star_container, 0.86420, 0.27160, 1, 0.38235)
+make_star(star_container, 0.12345, 0.74510, 2, 0.19608)
+make_star(star_container, 0.78431, 0.09804, 1, 0.43137)
+make_star(star_container, 0.05882, 0.35294, 2, 0.11765)
+make_star(star_container, 0.92157, 0.58824, 1, 0.27451)
+make_star(star_container, 0.47059, 0.82353, 2, 0.03922)
+make_star(star_container, 0.62745, 0.45098, 1, 0.21569)
+make_star(star_container, 0.33333, 0.17647, 2, 0.47059)
+make_star(star_container, 0.74510, 0.94118, 1, 0.31373)
+make_star(star_container, 0.19608, 0.54902, 2, 0.09804)
+make_star(star_container, 0.56863, 0.31373, 1, 0.41176)
+make_star(star_container, 0.84314, 0.70588, 2, 0.15686)
+make_star(star_container, 0.61161, 0.81203, 2, 0.12527)
+make_star(star_container, 0.70419, 0.80087, 2, 0.09852)
+make_star(star_container, 0.71808, 0.71649, 2, 0.14034)
+make_star(star_container, 0.55499, 0.97350, 2, 0.27567)
+make_star(star_container, 0.39313, 0.21471, 2, 0.35484)
+make_star(star_container, 0.31771, 0.68854, 1, 0.27914)
+make_star(star_container, 0.20678, 0.39957, 1, 0.26936)
+make_star(star_container, 0.24357, 1.12734, 1, 0.13177)
+make_star(star_container, 0.77745, 0.63986, 2, 0.10422)
+make_star(star_container, 0.60726, 0.00151, 1, 0.20519)
+
+-- // Title bar
+local title_bar = Instance.new("Frame")
+title_bar.Name = "TitleBar"
+title_bar.Size = UDim2.new(1, 0, 0, 32)
+title_bar.BackgroundTransparency = 1
+title_bar.ZIndex = 2
+title_bar.Parent = main_frame
+
+local title_label = Instance.new("TextLabel")
+title_label.Name = "TitleLabel"
+title_label.Text = "      Tokinu Hub - Base Protector"
+title_label.TextColor3 = Color3.fromRGB(235, 235, 255)
+title_label.TextSize = 14
+title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+title_label.TextXAlignment = Enum.TextXAlignment.Left
+title_label.Position = UDim2.new(0, 8, 0, 0)
+title_label.Size = UDim2.new(1, -40, 1, 0)
+title_label.BackgroundTransparency = 1
+title_label.ZIndex = 2
+title_label.Parent = title_bar
+
+local minimize_button = Instance.new("TextButton")
+minimize_button.Name = "MinimizeButton"
+minimize_button.Text = "–"
+minimize_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimize_button.TextSize = 20
+minimize_button.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+minimize_button.Position = UDim2.new(1, -32, 0, 2)
+minimize_button.Size = UDim2.new(0, 28, 0, 28)
+minimize_button.BackgroundTransparency = 1
+minimize_button.ZIndex = 2
+minimize_button.Parent = title_bar
+
+-- // Content container (gets faded out when minimized)
+local content_frame = Instance.new("Frame")
+content_frame.Name = "ContentFrame"
+content_frame.Position = UDim2.new(0, 10, 0, 40)
+content_frame.Size = UDim2.new(1, -20, 1, -60)
+content_frame.BackgroundTransparency = 1
+content_frame.ZIndex = 2
+content_frame.Parent = main_frame
+
+-- // Main action button
+local action_button = Instance.new("TextButton")
+action_button.Name = "ActionButton"
+action_button.Text = "base protector AP\nON"
+action_button.TextColor3 = Color3.fromRGB(255, 255, 255)
+action_button.TextSize = 20
+action_button.FontFace = Font.new("rbxasset://fonts/families/FredokaOne.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+action_button.TextWrapped = true
+action_button.Position = UDim2.new(0.5, -110, 0.5, -40)
+action_button.Size = UDim2.new(0, 220, 0, 60)
+action_button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+action_button.BackgroundTransparency = 0.4
+action_button.ZIndex = 2
+action_button.Parent = content_frame
+
+local action_corner = Instance.new("UICorner")
+action_corner.CornerRadius = UDim.new(0, 12)
+action_corner.Parent = action_button
+
+-- // Discord label
+local discord_label = Instance.new("TextLabel")
+discord_label.Name = "DiscordLabel"
+discord_label.Text = "discord.gg/tokinu"
+discord_label.TextColor3 = Color3.fromRGB(180, 180, 200)
+discord_label.TextSize = 11
+discord_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+discord_label.Position = UDim2.new(0, 0, 1, -20)
+discord_label.Size = UDim2.new(1, 0, 0, 20)
+discord_label.BackgroundTransparency = 1
+discord_label.ZIndex = 2
+discord_label.Parent = content_frame
+
+-- // ================================================
+-- // Drag functionality
+-- // ================================================
+local dragging = false
+local drag_start = nil
+local start_pos = nil
+
+title_bar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        drag_start = input.Position
+        start_pos = main_frame.Position
+    end
+end)
+
+title_bar.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = false
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - drag_start
+        main_frame.Position = UDim2.new(
+            start_pos.X.Scale,
+            start_pos.X.Offset + delta.X,
+            start_pos.Y.Scale,
+            start_pos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- // ================================================
+-- // Minimize button
+-- // ================================================
+local full_height = 170
+local mini_height = 32
+local tween_info_minimize = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+minimize_button.MouseButton1Click:Connect(function()
+    is_minimized = not is_minimized
+
+    if is_minimized then
+        -- // Fade out content, shrink frame
+        tween_service:Create(content_frame, tween_info_minimize, { GroupTransparency = 1 }):Play()
+        tween_service:Create(main_frame, tween_info_minimize, {
+            Size = UDim2.new(0, 260, 0, mini_height)
+        }):Play()
+        minimize_button.Text = "+"
+    else
+        -- // Expand first, then fade in content
+        local expand_tween = tween_service:Create(main_frame, tween_info_minimize, {
+            Size = UDim2.new(0, 260, 0, full_height)
+        })
+        expand_tween:Play()
+        expand_tween.Completed:Connect(function()
+            tween_service:Create(content_frame, tween_info_minimize, { GroupTransparency = 0 }):Play()
+        end)
+        minimize_button.Text = "–"
+    end
+end)
+
+-- // ================================================
+-- // Action button flash effect
+-- // ================================================
+local button_base_color = Color3.fromRGB(40, 40, 40)
+local button_flash_color = Color3.fromRGB(80, 80, 160)
+local tween_info_flash_in  = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local tween_info_flash_out = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+action_button.MouseButton1Click:Connect(function()
+    tween_service:Create(action_button, tween_info_flash_in, {
+        BackgroundColor3 = button_flash_color,
+        BackgroundTransparency = 0.1
+    }):Play()
+
+    task.delay(0.12, function()
+        tween_service:Create(action_button, tween_info_flash_out, {
+            BackgroundColor3 = button_base_color,
+            BackgroundTransparency = 0.4
+        }):Play()
+    end)
+end)
+end
+task.wait(1)
+do
+--// Tokinu Semi-TP
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local UserInputService = game:GetService("UserInputService")
+
+-- Draggable function - uses UserInputService for reliable drag tracking
+local function makeDraggable(frame, handle)
+    handle = handle or frame
+    handle.Active = true
+    frame.Active = true
+    local dragging = false
+    local dragStart
+    local startPos
+
+    handle.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+        end
+    end)
+
+    handle.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
+
+-- Keybind state
+local currentKey = Enum.KeyCode.F
+local isListeningForKey = false
+
+-- Animated Gradient function
+local function animateGradient(gradient)
+    local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, true, 0)
+    local startOffset = Vector2.new(0, 0)
+    local endOffset = Vector2.new(1, 0)
+
+    local tween = TweenService:Create(gradient, tweenInfo, {Offset = endOffset})
+    tween:Play()
+end
+
+-- Toggle Button function
+local function setupToggleButton(button, label, onText, offText, initialState, onToggleCallback)
+    local isOn = initialState
+    label.Text = (isOn and onText) or offText
+
+    local function updateVisuals()
+        local targetColor = isOn and Color3.fromRGB(100, 150, 255) or Color3.fromRGB(19, 29, 49)
+        local targetPosition = isOn and UDim2.new(1, -16, .5, -7) or UDim2.new(0, 2, .5, -7)
+        local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+        TweenService:Create(button.Parent.Frame, tweenInfo, {BackgroundColor3 = targetColor}):Play()
+        TweenService:Create(button.Parent.Frame.Frame, tweenInfo, {Position = targetPosition}):Play()
+    end
+
+    updateVisuals()
+
+    button.MouseButton1Click:Connect(function()
+        isOn = not isOn
+        label.Text = (isOn and onText) or offText
+        updateVisuals()
+        if onToggleCallback then
+            onToggleCallback(isOn)
+        end
+    end)
+end
+
+-- Kinustinks GUI
+-- Main ScreenGui
+local kinustinks = Instance.new("ScreenGui")
+kinustinks.Name = "kinustinks"
+kinustinks.Parent = PlayerGui
+
+-- Frame
+local kinustinksFrame = Instance.new("Frame")
+kinustinksFrame.Position = UDim2.new(0, 30, 0, 137)
+kinustinksFrame.Size = UDim2.new(0, 190, 0, 290)
+kinustinksFrame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+kinustinksFrame.BackgroundTransparency = 0.4000000059604645
+kinustinksFrame.ClipsDescendants = true
+kinustinksFrame.Name = "Frame"
+kinustinksFrame.Active = true
+kinustinksFrame.Parent = kinustinks
+
+-- UICorner for kinustinksFrame
+local kinustinksUICorner = Instance.new("UICorner")
+kinustinksUICorner.CornerRadius = UDim.new(0, 10)
+kinustinksUICorner.Name = "UICorner"
+kinustinksUICorner.Parent = kinustinksFrame
+
+-- UIStroke for kinustinksFrame
+local kinustinksUIStroke = Instance.new("UIStroke")
+kinustinksUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke.Thickness = 2
+kinustinksUIStroke.Name = "UIStroke"
+kinustinksUIStroke.Parent = kinustinksFrame
+
+-- UIGradient for kinustinksUIStroke
+local kinustinksUIGradient = Instance.new("UIGradient")
+kinustinksUIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient.Rotation = 253.20181274414062
+kinustinksUIGradient.Name = "UIGradient"
+kinustinksUIGradient.Parent = kinustinksUIStroke
+animateGradient(kinustinksUIGradient)
+
+-- TextLabel "Tokinu Hub"
+local kinustinksTextLabel = Instance.new("TextLabel")
+kinustinksTextLabel.Text = "            Tokinu Hub"
+kinustinksTextLabel.TextColor3 = Color3.fromRGB(100, 150, 255)
+kinustinksTextLabel.TextSize = 13
+kinustinksTextLabel.Font = Enum.Font.GothamBlack
+kinustinksTextLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel.Position = UDim2.new(0, 10, 0, 5)
+kinustinksTextLabel.Size = UDim2.new(1, -40, 0, 20)
+kinustinksTextLabel.BackgroundTransparency = 1
+kinustinksTextLabel.Name = "TextLabel"
+kinustinksTextLabel.Parent = kinustinksFrame
+makeDraggable(kinustinksFrame, kinustinksTextLabel)
+
+-- UIGradient 2 for kinustinksTextLabel
+local kinustinksUIGradient2 = Instance.new("UIGradient")
+kinustinksUIGradient2.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(0.35, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200, 220, 255)),
+    ColorSequenceKeypoint.new(0.65, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 100, 200))
+})
+kinustinksUIGradient2.Offset = Vector2.new(0.7479984760284424, 0)
+kinustinksUIGradient2.Name = "UIGradient"
+kinustinksUIGradient2.Parent = kinustinksTextLabel
+animateGradient(kinustinksUIGradient2)
+
+-- TextLabel 2 "Semi TP FREE"
+local kinustinksTextLabel2 = Instance.new("TextLabel")
+kinustinksTextLabel2.Text = "            Semi TP FREE"
+kinustinksTextLabel2.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel2.TextTransparency = 0.30000001192092896
+kinustinksTextLabel2.TextSize = 11
+kinustinksTextLabel2.Font = Enum.Font.GothamMedium
+kinustinksTextLabel2.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+kinustinksTextLabel2.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel2.Position = UDim2.new(0, 10, 0, 23)
+kinustinksTextLabel2.Size = UDim2.new(1, -40, 0, 15)
+kinustinksTextLabel2.BackgroundTransparency = 1
+kinustinksTextLabel2.Name = "TextLabel"
+kinustinksTextLabel2.Parent = kinustinksFrame
+
+-- TextButton "-"
+local kinustinksTextButton = Instance.new("TextButton")
+kinustinksTextButton.Text = "-"
+kinustinksTextButton.TextColor3 = Color3.fromRGB(100, 150, 255)
+kinustinksTextButton.TextSize = 14
+kinustinksTextButton.Font = Enum.Font.GothamBlack
+kinustinksTextButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextButton.Position = UDim2.new(1, -32, 0, 8)
+kinustinksTextButton.Size = UDim2.new(0, 24, 0, 24)
+kinustinksTextButton.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksTextButton.Name = "TextButton"
+kinustinksTextButton.Parent = kinustinksFrame
+local kinustinksMinimized = false
+
+-- UICorner 2 for kinustinksTextButton
+local kinustinksUICorner2 = Instance.new("UICorner")
+kinustinksUICorner2.CornerRadius = UDim.new(0, 6)
+kinustinksUICorner2.Name = "UICorner"
+kinustinksUICorner2.Parent = kinustinksTextButton
+
+-- UIStroke 2 for kinustinksTextButton
+local kinustinksUIStroke2 = Instance.new("UIStroke")
+kinustinksUIStroke2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke2.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke2.Thickness = 2
+kinustinksUIStroke2.Name = "UIStroke"
+kinustinksUIStroke2.Parent = kinustinksTextButton
+
+-- Frame 2
+local kinustinksFrame2 = Instance.new("Frame")
+kinustinksFrame2.Position = UDim2.new(0, 10, 0, 48)
+kinustinksFrame2.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame2.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame2.Name = "Frame"
+kinustinksFrame2.Parent = kinustinksFrame
+
+-- UIStroke 3 for kinustinksFrame2
+local kinustinksUIStroke3 = Instance.new("UIStroke")
+kinustinksUIStroke3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke3.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke3.Thickness = 1.5
+kinustinksUIStroke3.Name = "UIStroke"
+kinustinksUIStroke3.Parent = kinustinksFrame2
+
+-- UIGradient 3 for kinustinksUIStroke3
+local kinustinksUIGradient3 = Instance.new("UIGradient")
+kinustinksUIGradient3.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient3.Rotation = 168.79856872558594
+kinustinksUIGradient3.Name = "UIGradient"
+kinustinksUIGradient3.Parent = kinustinksUIStroke3
+animateGradient(kinustinksUIGradient3)
+
+-- UICorner 3 for kinustinksFrame2
+local kinustinksUICorner3 = Instance.new("UICorner")
+kinustinksUICorner3.Name = "UICorner"
+kinustinksUICorner3.Parent = kinustinksFrame2
+
+-- TextLabel 3 "Left Base"
+local kinustinksTextLabel3 = Instance.new("TextLabel")
+kinustinksTextLabel3.Text = "Left Base"
+kinustinksTextLabel3.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel3.TextSize = 12
+kinustinksTextLabel3.Font = Enum.Font.GothamBlack
+kinustinksTextLabel3.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel3.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel3.Position = UDim2.new(0, 10, 0, 0)
+kinustinksTextLabel3.Size = UDim2.new(1, -60, 1, 0)
+kinustinksTextLabel3.BackgroundTransparency = 1
+kinustinksTextLabel3.Name = "TextLabel"
+kinustinksTextLabel3.Parent = kinustinksFrame2
+
+-- TextButton 2 "Switch"
+local kinustinksTextButton2 = Instance.new("TextButton")
+kinustinksTextButton2.Text = "Switch"
+kinustinksTextButton2.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextButton2.TextSize = 11
+kinustinksTextButton2.Font = Enum.Font.GothamBlack
+kinustinksTextButton2.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextButton2.Position = UDim2.new(1, -54, .5, -10)
+kinustinksTextButton2.Size = UDim2.new(0, 46, 0, 20)
+kinustinksTextButton2.BackgroundColor3 = Color3.fromRGB(30, 40, 60)
+kinustinksTextButton2.Name = "TextButton"
+kinustinksTextButton2.Parent = kinustinksFrame2
+
+-- Left/Right Base toggle
+local isLeftBase = true
+kinustinksTextButton2.MouseButton1Click:Connect(function()
+    isLeftBase = not isLeftBase
+    kinustinksTextLabel3.Text = isLeftBase and "Left Base" or "Right Base"
+end)
+
+-- UICorner 4 for kinustinksTextButton2
+local kinustinksUICorner4 = Instance.new("UICorner")
+kinustinksUICorner4.CornerRadius = UDim.new(0, 5)
+kinustinksUICorner4.Name = "UICorner"
+kinustinksUICorner4.Parent = kinustinksTextButton2
+
+-- Frame 3
+local kinustinksFrame3 = Instance.new("Frame")
+kinustinksFrame3.Position = UDim2.new(0, 10, 0, 84)
+kinustinksFrame3.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame3.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame3.Name = "Frame"
+kinustinksFrame3.Parent = kinustinksFrame
+
+-- UIStroke 4 for kinustinksFrame3
+local kinustinksUIStroke4 = Instance.new("UIStroke")
+kinustinksUIStroke4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke4.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke4.Thickness = 1.5
+kinustinksUIStroke4.Name = "UIStroke"
+kinustinksUIStroke4.Parent = kinustinksFrame3
+
+-- UIGradient 4 for kinustinksUIStroke4
+local kinustinksUIGradient4 = Instance.new("UIGradient")
+kinustinksUIGradient4.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient4.Rotation = 168.79856872558594
+kinustinksUIGradient4.Name = "UIGradient"
+kinustinksUIGradient4.Parent = kinustinksUIStroke4
+animateGradient(kinustinksUIGradient4)
+
+-- UICorner 5 for kinustinksFrame3
+local kinustinksUICorner5 = Instance.new("UICorner")
+kinustinksUICorner5.Name = "UICorner"
+kinustinksUICorner5.Parent = kinustinksFrame3
+
+-- TextLabel 4 "Key: F"
+local kinustinksTextLabel4 = Instance.new("TextLabel")
+kinustinksTextLabel4.Text = "Key: F"
+kinustinksTextLabel4.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel4.TextSize = 12
+kinustinksTextLabel4.Font = Enum.Font.GothamBlack
+kinustinksTextLabel4.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel4.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel4.Position = UDim2.new(0, 10, 0, 0)
+kinustinksTextLabel4.Size = UDim2.new(1, -60, 1, 0)
+kinustinksTextLabel4.BackgroundTransparency = 1
+kinustinksTextLabel4.Name = "TextLabel"
+kinustinksTextLabel4.Parent = kinustinksFrame3
+
+-- TextButton 3 "Bind"
+local kinustinksTextButton3 = Instance.new("TextButton")
+kinustinksTextButton3.Text = "Bind"
+kinustinksTextButton3.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextButton3.TextSize = 11
+kinustinksTextButton3.Font = Enum.Font.GothamBlack
+kinustinksTextButton3.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextButton3.Position = UDim2.new(1, -54, .5, -10)
+kinustinksTextButton3.Size = UDim2.new(0, 46, 0, 20)
+kinustinksTextButton3.BackgroundColor3 = Color3.fromRGB(30, 40, 60)
+kinustinksTextButton3.Name = "TextButton"
+kinustinksTextButton3.Parent = kinustinksFrame3
+
+-- Keybind logic
+kinustinksTextLabel4.Text = "Key: " .. currentKey.Name
+kinustinksTextButton3.MouseButton1Click:Connect(function()
+    if isListeningForKey then return end
+    isListeningForKey = true
+    kinustinksTextButton3.Text = "..."
+    kinustinksTextLabel4.Text = "Press a key"
+    local conn
+    conn = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+            currentKey = input.KeyCode
+            kinustinksTextLabel4.Text = "Key: " .. currentKey.Name
+            kinustinksTextButton3.Text = "Bind"
+            isListeningForKey = false
+            conn:Disconnect()
+        end
+    end)
+end)
+
+-- UICorner 6 for kinustinksTextButton3
+local kinustinksUICorner6 = Instance.new("UICorner")
+kinustinksUICorner6.CornerRadius = UDim.new(0, 5)
+kinustinksUICorner6.Name = "UICorner"
+kinustinksUICorner6.Parent = kinustinksTextButton3
+
+-- Frame 4
+local kinustinksFrame4 = Instance.new("Frame")
+kinustinksFrame4.Position = UDim2.new(0, 10, 0, 120)
+kinustinksFrame4.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame4.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame4.Name = "Frame"
+kinustinksFrame4.Parent = kinustinksFrame
+
+-- UIStroke 5 for kinustinksFrame4
+local kinustinksUIStroke5 = Instance.new("UIStroke")
+kinustinksUIStroke5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke5.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke5.Thickness = 1.5
+kinustinksUIStroke5.Name = "UIStroke"
+kinustinksUIStroke5.Parent = kinustinksFrame4
+
+-- UIGradient 5 for kinustinksUIStroke5
+local kinustinksUIGradient5 = Instance.new("UIGradient")
+kinustinksUIGradient5.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient5.Rotation = 168.79856872558594
+kinustinksUIGradient5.Name = "UIGradient"
+kinustinksUIGradient5.Parent = kinustinksUIStroke5
+animateGradient(kinustinksUIGradient5)
+
+-- UICorner 7 for kinustinksFrame4
+local kinustinksUICorner7 = Instance.new("UICorner")
+kinustinksUICorner7.Name = "UICorner"
+kinustinksUICorner7.Parent = kinustinksFrame4
+
+-- TextLabel 5 "Auto Potion: OFF"
+local kinustinksTextLabel5 = Instance.new("TextLabel")
+kinustinksTextLabel5.Text = "Auto Potion: OFF"
+kinustinksTextLabel5.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel5.TextSize = 9
+kinustinksTextLabel5.Font = Enum.Font.GothamBlack
+kinustinksTextLabel5.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel5.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel5.Position = UDim2.new(0, 10, 0, 0)
+kinustinksTextLabel5.Size = UDim2.new(1, -60, 1, 0)
+kinustinksTextLabel5.BackgroundTransparency = 1
+kinustinksTextLabel5.Name = "TextLabel"
+kinustinksTextLabel5.Parent = kinustinksFrame4
+
+-- Frame 5
+local kinustinksFrame5 = Instance.new("Frame")
+kinustinksFrame5.Position = UDim2.new(1, -46, .5, -9)
+kinustinksFrame5.Size = UDim2.new(0, 36, 0, 18)
+kinustinksFrame5.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+kinustinksFrame5.BackgroundTransparency = 1
+kinustinksFrame5.Name = "Frame"
+kinustinksFrame5.Parent = kinustinksFrame4
+
+-- UICorner 8 for kinustinksFrame5
+local kinustinksUICorner8 = Instance.new("UICorner")
+kinustinksUICorner8.CornerRadius = UDim.new(0, 9)
+kinustinksUICorner8.Name = "UICorner"
+kinustinksUICorner8.Parent = kinustinksFrame5
+
+-- UIStroke 6 for kinustinksFrame5
+local kinustinksUIStroke6 = Instance.new("UIStroke")
+kinustinksUIStroke6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke6.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke6.Thickness = 2
+kinustinksUIStroke6.Name = "UIStroke"
+kinustinksUIStroke6.Parent = kinustinksFrame5
+
+-- UIGradient 6 for kinustinksUIStroke6
+local kinustinksUIGradient6 = Instance.new("UIGradient")
+kinustinksUIGradient6.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient6.Rotation = 253.20181274414062
+kinustinksUIGradient6.Name = "UIGradient"
+kinustinksUIGradient6.Parent = kinustinksUIStroke6
+animateGradient(kinustinksUIGradient6)
+
+-- Frame 6
+local kinustinksFrame6 = Instance.new("Frame")
+kinustinksFrame6.Position = UDim2.new(0, 2, .5, -7)
+kinustinksFrame6.Size = UDim2.new(0, 14, 0, 14)
+kinustinksFrame6.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+kinustinksFrame6.Name = "Frame"
+kinustinksFrame6.Parent = kinustinksFrame5
+
+-- UICorner 9 for kinustinksFrame6
+local kinustinksUICorner9 = Instance.new("UICorner")
+kinustinksUICorner9.CornerRadius = UDim.new(0, 7)
+kinustinksUICorner9.Name = "UICorner"
+kinustinksUICorner9.Parent = kinustinksFrame6
+
+-- TextButton 4
+local kinustinksTextButton4 = Instance.new("TextButton")
+kinustinksTextButton4.Text = ""
+kinustinksTextButton4.Size = UDim2.new(1, 0, 1, 0)
+kinustinksTextButton4.BackgroundTransparency = 1
+kinustinksTextButton4.Name = "TextButton"
+kinustinksTextButton4.Parent = kinustinksFrame4
+setupToggleButton(kinustinksTextButton4, kinustinksTextLabel5, "Auto Potion: ON", "Auto Potion: OFF", false)
+
+-- Frame 7
+local kinustinksFrame7 = Instance.new("Frame")
+kinustinksFrame7.Position = UDim2.new(0, 10, 0, 156)
+kinustinksFrame7.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame7.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame7.Name = "Frame"
+kinustinksFrame7.Parent = kinustinksFrame
+
+-- UIStroke 7 for kinustinksFrame7
+local kinustinksUIStroke7 = Instance.new("UIStroke")
+kinustinksUIStroke7.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke7.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke7.Thickness = 1.5
+kinustinksUIStroke7.Name = "UIStroke"
+kinustinksUIStroke7.Parent = kinustinksFrame7
+
+-- UIGradient 7 for kinustinksUIStroke7
+local kinustinksUIGradient7 = Instance.new("UIGradient")
+kinustinksUIGradient7.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient7.Rotation = 168.79856872558594
+kinustinksUIGradient7.Name = "UIGradient"
+kinustinksUIGradient7.Parent = kinustinksUIStroke7
+animateGradient(kinustinksUIGradient7)
+
+-- UICorner 10 for kinustinksFrame7
+local kinustinksUICorner10 = Instance.new("UICorner")
+kinustinksUICorner10.Name = "UICorner"
+kinustinksUICorner10.Parent = kinustinksFrame7
+
+-- TextLabel 6 "Timer ESP: OFF"
+local kinustinksTextLabel6 = Instance.new("TextLabel")
+kinustinksTextLabel6.Text = "Timer ESP: OFF"
+kinustinksTextLabel6.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel6.TextSize = 9
+kinustinksTextLabel6.Font = Enum.Font.GothamBlack
+kinustinksTextLabel6.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel6.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel6.Position = UDim2.new(0, 10, 0, 0)
+kinustinksTextLabel6.Size = UDim2.new(1, -60, 1, 0)
+kinustinksTextLabel6.BackgroundTransparency = 1
+kinustinksTextLabel6.Name = "TextLabel"
+kinustinksTextLabel6.Parent = kinustinksFrame7
+
+-- Frame 8
+local kinustinksFrame8 = Instance.new("Frame")
+kinustinksFrame8.Position = UDim2.new(1, -46, .5, -9)
+kinustinksFrame8.Size = UDim2.new(0, 36, 0, 18)
+kinustinksFrame8.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+kinustinksFrame8.BackgroundTransparency = 1
+kinustinksFrame8.Name = "Frame"
+kinustinksFrame8.Parent = kinustinksFrame7
+
+-- UICorner 11 for kinustinksFrame8
+local kinustinksUICorner11 = Instance.new("UICorner")
+kinustinksUICorner11.CornerRadius = UDim.new(0, 9)
+kinustinksUICorner11.Name = "UICorner"
+kinustinksUICorner11.Parent = kinustinksFrame8
+
+-- UIStroke 8 for kinustinksFrame8
+local kinustinksUIStroke8 = Instance.new("UIStroke")
+kinustinksUIStroke8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke8.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke8.Thickness = 2
+kinustinksUIStroke8.Name = "UIStroke"
+kinustinksUIStroke8.Parent = kinustinksFrame8
+
+-- UIGradient 8 for kinustinksUIStroke8
+local kinustinksUIGradient8 = Instance.new("UIGradient")
+kinustinksUIGradient8.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient8.Rotation = 253.20181274414062
+kinustinksUIGradient8.Name = "UIGradient"
+kinustinksUIGradient8.Parent = kinustinksUIStroke8
+animateGradient(kinustinksUIGradient8)
+
+-- Frame 9
+local kinustinksFrame9 = Instance.new("Frame")
+kinustinksFrame9.Position = UDim2.new(0, 2, .5, -7)
+kinustinksFrame9.Size = UDim2.new(0, 14, 0, 14)
+kinustinksFrame9.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+kinustinksFrame9.Name = "Frame"
+kinustinksFrame9.Parent = kinustinksFrame8
+
+-- UICorner 12 for kinustinksFrame9
+local kinustinksUICorner12 = Instance.new("UICorner")
+kinustinksUICorner12.CornerRadius = UDim.new(0, 7)
+kinustinksUICorner12.Name = "UICorner"
+kinustinksUICorner12.Parent = kinustinksFrame9
+
+-- TextButton 5
+local kinustinksTextButton5 = Instance.new("TextButton")
+kinustinksTextButton5.Text = ""
+kinustinksTextButton5.Size = UDim2.new(1, 0, 1, 0)
+kinustinksTextButton5.BackgroundTransparency = 1
+kinustinksTextButton5.Name = "TextButton"
+kinustinksTextButton5.Parent = kinustinksFrame7
+setupToggleButton(kinustinksTextButton5, kinustinksTextLabel6, "Timer ESP: ON", "Timer ESP: OFF", false)
+
+-- Frame 10
+local kinustinksFrame10 = Instance.new("Frame")
+kinustinksFrame10.Position = UDim2.new(0, 10, 0, 192)
+kinustinksFrame10.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame10.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame10.Name = "Frame"
+kinustinksFrame10.Parent = kinustinksFrame
+
+-- UIStroke 9 for kinustinksFrame10
+local kinustinksUIStroke9 = Instance.new("UIStroke")
+kinustinksUIStroke9.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke9.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke9.Thickness = 1.5
+kinustinksUIStroke9.Name = "UIStroke"
+kinustinksUIStroke9.Parent = kinustinksFrame10
+
+-- UIGradient 9 for kinustinksUIStroke9
+local kinustinksUIGradient9 = Instance.new("UIGradient")
+kinustinksUIGradient9.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient9.Rotation = 168.99856567382812
+kinustinksUIGradient9.Name = "UIGradient"
+kinustinksUIGradient9.Parent = kinustinksUIStroke9
+animateGradient(kinustinksUIGradient9)
+
+-- UICorner 13 for kinustinksFrame10
+local kinustinksUICorner13 = Instance.new("UICorner")
+kinustinksUICorner13.Name = "UICorner"
+kinustinksUICorner13.Parent = kinustinksFrame10
+
+-- TextLabel 7 "Friend ESP: OFF"
+local kinustinksTextLabel7 = Instance.new("TextLabel")
+kinustinksTextLabel7.Text = "Friend ESP: OFF"
+kinustinksTextLabel7.TextColor3 = Color3.fromRGB(150, 180, 255)
+kinustinksTextLabel7.TextSize = 9
+kinustinksTextLabel7.Font = Enum.Font.GothamBlack
+kinustinksTextLabel7.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextLabel7.TextXAlignment = Enum.TextXAlignment.Left
+kinustinksTextLabel7.Position = UDim2.new(0, 10, 0, 0)
+kinustinksTextLabel7.Size = UDim2.new(1, -60, 1, 0)
+kinustinksTextLabel7.BackgroundTransparency = 1
+kinustinksTextLabel7.Name = "TextLabel"
+kinustinksTextLabel7.Parent = kinustinksFrame10
+
+-- Frame 11
+local kinustinksFrame11 = Instance.new("Frame")
+kinustinksFrame11.Position = UDim2.new(1, -46, .5, -9)
+kinustinksFrame11.Size = UDim2.new(0, 36, 0, 18)
+kinustinksFrame11.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+kinustinksFrame11.BackgroundTransparency = 1
+kinustinksFrame11.Name = "Frame"
+kinustinksFrame11.Parent = kinustinksFrame10
+
+-- UICorner 14 for kinustinksFrame11
+local kinustinksUICorner14 = Instance.new("UICorner")
+kinustinksUICorner14.CornerRadius = UDim.new(0, 9)
+kinustinksUICorner14.Name = "UICorner"
+kinustinksUICorner14.Parent = kinustinksFrame11
+
+-- UIStroke 10 for kinustinksFrame11
+local kinustinksUIStroke10 = Instance.new("UIStroke")
+kinustinksUIStroke10.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke10.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke10.Thickness = 2
+kinustinksUIStroke10.Name = "UIStroke"
+kinustinksUIStroke10.Parent = kinustinksFrame11
+
+-- UIGradient 10 for kinustinksUIStroke10
+local kinustinksUIGradient10 = Instance.new("UIGradient")
+kinustinksUIGradient10.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient10.Rotation = 253.50181579589844
+kinustinksUIGradient10.Name = "UIGradient"
+kinustinksUIGradient10.Parent = kinustinksUIStroke10
+animateGradient(kinustinksUIGradient10)
+
+-- Frame 12
+local kinustinksFrame12 = Instance.new("Frame")
+kinustinksFrame12.Position = UDim2.new(0, 2, .5, -7)
+kinustinksFrame12.Size = UDim2.new(0, 14, 0, 14)
+kinustinksFrame12.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+kinustinksFrame12.Name = "Frame"
+kinustinksFrame12.Parent = kinustinksFrame11
+
+-- UICorner 15 for kinustinksFrame12
+local kinustinksUICorner15 = Instance.new("UICorner")
+kinustinksUICorner15.CornerRadius = UDim.new(0, 7)
+kinustinksUICorner15.Name = "UICorner"
+kinustinksUICorner15.Parent = kinustinksFrame12
+
+-- TextButton 6
+local kinustinksTextButton6 = Instance.new("TextButton")
+kinustinksTextButton6.Text = ""
+kinustinksTextButton6.Size = UDim2.new(1, 0, 1, 0)
+kinustinksTextButton6.BackgroundTransparency = 1
+kinustinksTextButton6.Name = "TextButton"
+kinustinksTextButton6.Parent = kinustinksFrame10
+setupToggleButton(kinustinksTextButton6, kinustinksTextLabel7, "Friend ESP: ON", "Friend ESP: OFF", false)
+
+-- Frame 13
+local kinustinksFrame13 = Instance.new("Frame")
+kinustinksFrame13.Position = UDim2.new(0, 10, 0, 228)
+kinustinksFrame13.Size = UDim2.new(1, -20, 0, 30)
+kinustinksFrame13.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+kinustinksFrame13.Name = "Frame"
+kinustinksFrame13.Parent = kinustinksFrame
+
+-- UIStroke 11 for kinustinksFrame13
+local kinustinksUIStroke11 = Instance.new("UIStroke")
+kinustinksUIStroke11.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+kinustinksUIStroke11.Color = Color3.fromRGB(40, 80, 180)
+kinustinksUIStroke11.Thickness = 1.5
+kinustinksUIStroke11.Name = "UIStroke"
+kinustinksUIStroke11.Parent = kinustinksFrame13
+
+-- UIGradient 11 for kinustinksUIStroke11
+local kinustinksUIGradient11 = Instance.new("UIGradient")
+kinustinksUIGradient11.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+kinustinksUIGradient11.Rotation = 168.99856567382812
+kinustinksUIGradient11.Name = "UIGradient"
+kinustinksUIGradient11.Parent = kinustinksUIStroke11
+animateGradient(kinustinksUIGradient11)
+
+-- UICorner 16 for kinustinksFrame13
+local kinustinksUICorner16 = Instance.new("UICorner")
+kinustinksUICorner16.Name = "UICorner"
+kinustinksUICorner16.Parent = kinustinksFrame13
+
+-- TextButton 7 "SEMI TP"
+local kinustinksTextButton7 = Instance.new("TextButton")
+kinustinksTextButton7.Text = "SEMI TP"
+kinustinksTextButton7.TextColor3 = Color3.fromRGB(200, 220, 255)
+kinustinksTextButton7.TextSize = 13
+kinustinksTextButton7.Font = Enum.Font.GothamBlack
+kinustinksTextButton7.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+kinustinksTextButton7.Size = UDim2.new(1, 0, 1, 0)
+kinustinksTextButton7.BackgroundTransparency = 1
+kinustinksTextButton7.Name = "TextButton"
+kinustinksTextButton7.Parent = kinustinksFrame13
+
+-- TextLabel 8 "discord.gg/tokinu"
+local kinustinksTextLabel8 = Instance.new("TextLabel")
+kinustinksTextLabel8.Text = "discord.gg/tokinu"
+kinustinksTextLabel8.TextColor3 = Color3.fromRGB(255, 255, 255)
+kinustinksTextLabel8.TextTransparency = 0.4000000059604645
+kinustinksTextLabel8.TextSize = 11
+kinustinksTextLabel8.Font = Enum.Font.GothamMedium
+kinustinksTextLabel8.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+kinustinksTextLabel8.Position = UDim2.new(0, 10, 0, 262)
+kinustinksTextLabel8.Size = UDim2.new(1, -20, 0, 16)
+kinustinksTextLabel8.BackgroundTransparency = 1
+kinustinksTextLabel8.Name = "TextLabel"
+kinustinksTextLabel8.Parent = kinustinksFrame
+
+
+-- Speedbost GUI
+-- Main ScreenGui
+local speedbost = Instance.new("ScreenGui")
+speedbost.Name = "speedbost"
+speedbost.Parent = PlayerGui
+
+-- Frame
+local speedbostFrame = Instance.new("Frame")
+speedbostFrame.Position = UDim2.new(0, 240, 0, 137)
+speedbostFrame.Size = UDim2.new(0, 190, 0, 195)
+speedbostFrame.BackgroundColor3 = Color3.fromRGB(10, 15, 30)
+speedbostFrame.BackgroundTransparency = 0.4000000059604645
+speedbostFrame.ClipsDescendants = true
+speedbostFrame.Name = "Frame"
+speedbostFrame.Active = true
+speedbostFrame.Parent = speedbost
+
+-- UICorner for speedbostFrame
+local speedbostUICorner = Instance.new("UICorner")
+speedbostUICorner.CornerRadius = UDim.new(0, 10)
+speedbostUICorner.Name = "UICorner"
+speedbostUICorner.Parent = speedbostFrame
+
+-- UIStroke for speedbostFrame
+local speedbostUIStroke = Instance.new("UIStroke")
+speedbostUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke.Thickness = 2
+speedbostUIStroke.Name = "UIStroke"
+speedbostUIStroke.Parent = speedbostFrame
+
+-- UIGradient for speedbostUIStroke
+local speedbostUIGradient = Instance.new("UIGradient")
+speedbostUIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient.Rotation = 96.30021667480469
+speedbostUIGradient.Name = "UIGradient"
+speedbostUIGradient.Parent = speedbostUIStroke
+animateGradient(speedbostUIGradient)
+
+-- TextLabel "Speed Booster"
+local speedbostTextLabel = Instance.new("TextLabel")
+speedbostTextLabel.Text = "     Speed Booster"
+speedbostTextLabel.TextColor3 = Color3.fromRGB(100, 150, 255)
+speedbostTextLabel.TextSize = 14
+speedbostTextLabel.Font = Enum.Font.GothamBlack
+speedbostTextLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel.Position = UDim2.new(0, 10, 0, 5)
+speedbostTextLabel.Size = UDim2.new(1, -40, 0, 20)
+speedbostTextLabel.BackgroundTransparency = 1
+speedbostTextLabel.Name = "TextLabel"
+speedbostTextLabel.Parent = speedbostFrame
+makeDraggable(speedbostFrame, speedbostTextLabel)
+
+-- UIGradient 2 for speedbostTextLabel
+local speedbostUIGradient2 = Instance.new("UIGradient")
+speedbostUIGradient2.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(0.35, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200, 220, 255)),
+    ColorSequenceKeypoint.new(0.65, Color3.fromRGB(60, 100, 200)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(60, 100, 200))
+})
+speedbostUIGradient2.Offset = Vector2.new(1.0680023431777954, 0)
+speedbostUIGradient2.Name = "UIGradient"
+speedbostUIGradient2.Parent = speedbostTextLabel
+animateGradient(speedbostUIGradient2)
+
+-- TextLabel 2 "discord.gg/tokinu"
+local speedbostTextLabel2 = Instance.new("TextLabel")
+speedbostTextLabel2.Text = "         discord.gg/tokinu"
+speedbostTextLabel2.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextLabel2.TextTransparency = 0.30000001192092896
+speedbostTextLabel2.TextSize = 11
+speedbostTextLabel2.Font = Enum.Font.GothamMedium
+speedbostTextLabel2.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+speedbostTextLabel2.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel2.Position = UDim2.new(0, 10, 0, 23)
+speedbostTextLabel2.Size = UDim2.new(1, -40, 0, 15)
+speedbostTextLabel2.BackgroundTransparency = 1
+speedbostTextLabel2.Name = "TextLabel"
+speedbostTextLabel2.Parent = speedbostFrame
+
+-- TextButton "-"
+local speedbostTextButton = Instance.new("TextButton")
+speedbostTextButton.Text = "-"
+speedbostTextButton.TextColor3 = Color3.fromRGB(100, 150, 255)
+speedbostTextButton.TextSize = 14
+speedbostTextButton.Font = Enum.Font.GothamBlack
+speedbostTextButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextButton.Position = UDim2.new(1, -32, 0, 8)
+speedbostTextButton.Size = UDim2.new(0, 24, 0, 24)
+speedbostTextButton.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speedbostTextButton.Name = "TextButton"
+speedbostTextButton.Parent = speedbostFrame
+local speedbostMinimized = false
+
+-- UICorner 2 for speedbostTextButton
+local speedbostUICorner2 = Instance.new("UICorner")
+speedbostUICorner2.CornerRadius = UDim.new(0, 6)
+speedbostUICorner2.Name = "UICorner"
+speedbostUICorner2.Parent = speedbostTextButton
+
+-- UIStroke 2 for speedbostTextButton
+local speedbostUIStroke2 = Instance.new("UIStroke")
+speedbostUIStroke2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke2.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke2.Thickness = 2
+speedbostUIStroke2.Name = "UIStroke"
+speedbostUIStroke2.Parent = speedbostTextButton
+
+-- Frame 2
+local speedbostFrame2 = Instance.new("Frame")
+speedbostFrame2.Position = UDim2.new(0, 10, 0, 48)
+speedbostFrame2.Size = UDim2.new(1, -20, 0, 30)
+speedbostFrame2.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speedbostFrame2.Name = "Frame"
+speedbostFrame2.Parent = speedbostFrame
+
+-- UIStroke 3 for speedbostFrame2
+local speedbostUIStroke3 = Instance.new("UIStroke")
+speedbostUIStroke3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke3.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke3.Thickness = 1.5
+speedbostUIStroke3.Name = "UIStroke"
+speedbostUIStroke3.Parent = speedbostFrame2
+
+-- UIGradient 3 for speedbostUIStroke3
+local speedbostUIGradient3 = Instance.new("UIGradient")
+speedbostUIGradient3.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient3.Rotation = 64.20016479492188
+speedbostUIGradient3.Name = "UIGradient"
+speedbostUIGradient3.Parent = speedbostUIStroke3
+animateGradient(speedbostUIGradient3)
+
+-- UICorner 3 for speedbostFrame2
+local speedbostUICorner3 = Instance.new("UICorner")
+speedbostUICorner3.Name = "UICorner"
+speedbostUICorner3.Parent = speedbostFrame2
+
+-- TextLabel 3 "Speed: OFF"
+local speedbostTextLabel3 = Instance.new("TextLabel")
+speedbostTextLabel3.Text = "Speed: OFF"
+speedbostTextLabel3.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextLabel3.TextSize = 9
+speedbostTextLabel3.Font = Enum.Font.GothamBlack
+speedbostTextLabel3.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextLabel3.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel3.Position = UDim2.new(0, 10, 0, 0)
+speedbostTextLabel3.Size = UDim2.new(1, -60, 1, 0)
+speedbostTextLabel3.BackgroundTransparency = 1
+speedbostTextLabel3.Name = "TextLabel"
+speedbostTextLabel3.Parent = speedbostFrame2
+
+-- Frame 3
+local speedbostFrame3 = Instance.new("Frame")
+speedbostFrame3.Position = UDim2.new(1, -46, .5, -9)
+speedbostFrame3.Size = UDim2.new(0, 36, 0, 18)
+speedbostFrame3.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+speedbostFrame3.BackgroundTransparency = 1
+speedbostFrame3.Name = "Frame"
+speedbostFrame3.Parent = speedbostFrame2
+
+-- UICorner 4 for speedbostFrame3
+local speedbostUICorner4 = Instance.new("UICorner")
+speedbostUICorner4.CornerRadius = UDim.new(0, 9)
+speedbostUICorner4.Name = "UICorner"
+speedbostUICorner4.Parent = speedbostFrame3
+
+-- UIStroke 4 for speedbostFrame3
+local speedbostUIStroke4 = Instance.new("UIStroke")
+speedbostUIStroke4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke4.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke4.Thickness = 2
+speedbostUIStroke4.Name = "UIStroke"
+speedbostUIStroke4.Parent = speedbostFrame3
+
+-- UIGradient 4 for speedbostUIStroke4
+local speedbostUIGradient4 = Instance.new("UIGradient")
+speedbostUIGradient4.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient4.Rotation = 96.30021667480469
+speedbostUIGradient4.Name = "UIGradient"
+speedbostUIGradient4.Parent = speedbostUIStroke4
+animateGradient(speedbostUIGradient4)
+
+-- Frame 4
+local speedbostFrame4 = Instance.new("Frame")
+speedbostFrame4.Position = UDim2.new(0, 2, .5, -7)
+speedbostFrame4.Size = UDim2.new(0, 14, 0, 14)
+speedbostFrame4.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+speedbostFrame4.Name = "Frame"
+speedbostFrame4.Parent = speedbostFrame3
+
+-- UICorner 5 for speedbostFrame4
+local speedbostUICorner5 = Instance.new("UICorner")
+speedbostUICorner5.CornerRadius = UDim.new(0, 7)
+speedbostUICorner5.Name = "UICorner"
+speedbostUICorner5.Parent = speedbostFrame4
+
+-- TextButton 2
+local speedbostTextButton2 = Instance.new("TextButton")
+speedbostTextButton2.Text = ""
+speedbostTextButton2.Size = UDim2.new(1, 0, 1, 0)
+speedbostTextButton2.BackgroundTransparency = 1
+speedbostTextButton2.Name = "TextButton"
+speedbostTextButton2.Parent = speedbostFrame2
+setupToggleButton(speedbostTextButton2, speedbostTextLabel3, "Speed: ON", "Speed: OFF", false)
+
+-- Frame 5
+local speedbostFrame5 = Instance.new("Frame")
+speedbostFrame5.Position = UDim2.new(0, 10, 0, 84)
+speedbostFrame5.Size = UDim2.new(1, -20, 0, 30)
+speedbostFrame5.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speedbostFrame5.Name = "Frame"
+speedbostFrame5.Parent = speedbostFrame
+
+-- UIStroke 5 for speedbostFrame5
+local speedbostUIStroke5 = Instance.new("UIStroke")
+speedbostUIStroke5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke5.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke5.Thickness = 1.5
+speedbostUIStroke5.Name = "UIStroke"
+speedbostUIStroke5.Parent = speedbostFrame5
+
+-- UIGradient 5 for speedbostUIStroke5
+local speedbostUIGradient5 = Instance.new("UIGradient")
+speedbostUIGradient5.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient5.Rotation = 64.20016479492188
+speedbostUIGradient5.Name = "UIGradient"
+speedbostUIGradient5.Parent = speedbostUIStroke5
+animateGradient(speedbostUIGradient5)
+
+-- UICorner 6 for speedbostFrame5
+local speedbostUICorner6 = Instance.new("UICorner")
+speedbostUICorner6.Name = "UICorner"
+speedbostUICorner6.Parent = speedbostFrame5
+
+-- TextLabel 4 "Speed:"
+local speedbostTextLabel4 = Instance.new("TextLabel")
+speedbostTextLabel4.Text = "Speed:"
+speedbostTextLabel4.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextLabel4.TextSize = 11
+speedbostTextLabel4.Font = Enum.Font.GothamBlack
+speedbostTextLabel4.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextLabel4.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel4.Position = UDim2.new(0, 10, 0, 0)
+speedbostTextLabel4.Size = UDim2.new(1, -60, 1, 0)
+speedbostTextLabel4.BackgroundTransparency = 1
+speedbostTextLabel4.Name = "TextLabel"
+speedbostTextLabel4.Parent = speedbostFrame5
+
+-- TextBox
+local speedbostTextBox = Instance.new("TextBox")
+speedbostTextBox.Text = "45"
+speedbostTextBox.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextBox.TextSize = 11
+speedbostTextBox.Font = Enum.Font.GothamBlack
+speedbostTextBox.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextBox.PlaceholderText = "0-45"
+speedbostTextBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 130)
+speedbostTextBox.Position = UDim2.new(1, -45, .5, -10)
+speedbostTextBox.Size = UDim2.new(0, 40, 0, 20)
+speedbostTextBox.BackgroundColor3 = Color3.fromRGB(40, 50, 70)
+speedbostTextBox.Name = "TextBox"
+speedbostTextBox.Parent = speedbostFrame5
+
+-- UICorner 7 for speedbostTextBox
+local speedbostUICorner7 = Instance.new("UICorner")
+speedbostUICorner7.CornerRadius = UDim.new(0, 4)
+speedbostUICorner7.Name = "UICorner"
+speedbostUICorner7.Parent = speedbostTextBox
+
+-- Frame 6
+local speedbostFrame6 = Instance.new("Frame")
+speedbostFrame6.Position = UDim2.new(0, 10, 0, 120)
+speedbostFrame6.Size = UDim2.new(1, -20, 0, 30)
+speedbostFrame6.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speedbostFrame6.Name = "Frame"
+speedbostFrame6.Parent = speedbostFrame
+
+-- UIStroke 6 for speedbostFrame6
+local speedbostUIStroke6 = Instance.new("UIStroke")
+speedbostUIStroke6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke6.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke6.Thickness = 1.5
+speedbostUIStroke6.Name = "UIStroke"
+speedbostUIStroke6.Parent = speedbostFrame6
+
+-- UIGradient 6 for speedbostUIStroke6
+local speedbostUIGradient6 = Instance.new("UIGradient")
+speedbostUIGradient6.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient6.Rotation = 64.20016479492188
+speedbostUIGradient6.Name = "UIGradient"
+speedbostUIGradient6.Parent = speedbostUIStroke6
+animateGradient(speedbostUIGradient6)
+
+-- UICorner 8 for speedbostFrame6
+local speedbostUICorner8 = Instance.new("UICorner")
+speedbostUICorner8.Name = "UICorner"
+speedbostUICorner8.Parent = speedbostFrame6
+
+-- TextLabel 5 "Steal spd: ON"
+local speedbostTextLabel5 = Instance.new("TextLabel")
+speedbostTextLabel5.Text = "Steal spd: ON"
+speedbostTextLabel5.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextLabel5.TextSize = 9
+speedbostTextLabel5.Font = Enum.Font.GothamBlack
+speedbostTextLabel5.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextLabel5.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel5.Position = UDim2.new(0, 10, 0, 0)
+speedbostTextLabel5.Size = UDim2.new(1, -60, 1, 0)
+speedbostTextLabel5.BackgroundTransparency = 1
+speedbostTextLabel5.Name = "TextLabel"
+speedbostTextLabel5.Parent = speedbostFrame6
+
+-- Frame 7
+local speedbostFrame7 = Instance.new("Frame")
+speedbostFrame7.Position = UDim2.new(1, -46, .5, -9)
+speedbostFrame7.Size = UDim2.new(0, 36, 0, 18)
+speedbostFrame7.BackgroundColor3 = Color3.fromRGB(19, 29, 49)
+speedbostFrame7.BackgroundTransparency = 1
+speedbostFrame7.Name = "Frame"
+speedbostFrame7.Parent = speedbostFrame6
+
+-- UICorner 9 for speedbostFrame7
+local speedbostUICorner9 = Instance.new("UICorner")
+speedbostUICorner9.CornerRadius = UDim.new(0, 9)
+speedbostUICorner9.Name = "UICorner"
+speedbostUICorner9.Parent = speedbostFrame7
+
+-- UIStroke 7 for speedbostFrame7
+local speedbostUIStroke7 = Instance.new("UIStroke")
+speedbostUIStroke7.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke7.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke7.Thickness = 2
+speedbostUIStroke7.Name = "UIStroke"
+speedbostUIStroke7.Parent = speedbostFrame7
+
+-- UIGradient 7 for speedbostUIStroke7
+local speedbostUIGradient7 = Instance.new("UIGradient")
+speedbostUIGradient7.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient7.Rotation = 96.30021667480469
+speedbostUIGradient7.Name = "UIGradient"
+speedbostUIGradient7.Parent = speedbostUIStroke7
+animateGradient(speedbostUIGradient7)
+
+-- Frame 8
+local speedbostFrame8 = Instance.new("Frame")
+speedbostFrame8.Position = UDim2.new(1, -16, .5, -7)
+speedbostFrame8.Size = UDim2.new(0, 14, 0, 14)
+speedbostFrame8.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+speedbostFrame8.Name = "Frame"
+speedbostFrame8.Parent = speedbostFrame7
+
+-- UICorner 10 for speedbostFrame8
+local speedbostUICorner10 = Instance.new("UICorner")
+speedbostUICorner10.CornerRadius = UDim.new(0, 7)
+speedbostUICorner10.Name = "UICorner"
+speedbostUICorner10.Parent = speedbostFrame8
+
+-- TextButton 3
+local speedbostTextButton3 = Instance.new("TextButton")
+speedbostTextButton3.Text = ""
+speedbostTextButton3.Size = UDim2.new(1, 0, 1, 0)
+speedbostTextButton3.BackgroundTransparency = 1
+speedbostTextButton3.Name = "TextButton"
+speedbostTextButton3.Parent = speedbostFrame6
+setupToggleButton(speedbostTextButton3, speedbostTextLabel5, "Steal spd: ON", "Steal spd: OFF", true)
+
+-- Frame 9
+local speedbostFrame9 = Instance.new("Frame")
+speedbostFrame9.Position = UDim2.new(0, 10, 0, 156)
+speedbostFrame9.Size = UDim2.new(1, -20, 0, 30)
+speedbostFrame9.BackgroundColor3 = Color3.fromRGB(20, 30, 50)
+speedbostFrame9.Name = "Frame"
+speedbostFrame9.Parent = speedbostFrame
+
+-- UIStroke 8 for speedbostFrame9
+local speedbostUIStroke8 = Instance.new("UIStroke")
+speedbostUIStroke8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+speedbostUIStroke8.Color = Color3.fromRGB(40, 80, 180)
+speedbostUIStroke8.Thickness = 1.5
+speedbostUIStroke8.Name = "UIStroke"
+speedbostUIStroke8.Parent = speedbostFrame9
+
+-- UIGradient 8 for speedbostUIStroke8
+local speedbostUIGradient8 = Instance.new("UIGradient")
+speedbostUIGradient8.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 80, 180)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))})
+speedbostUIGradient8.Rotation = 64.20016479492188
+speedbostUIGradient8.Name = "UIGradient"
+speedbostUIGradient8.Parent = speedbostUIStroke8
+animateGradient(speedbostUIGradient8)
+
+-- UICorner 11 for speedbostFrame9
+local speedbostUICorner11 = Instance.new("UICorner")
+speedbostUICorner11.Name = "UICorner"
+speedbostUICorner11.Parent = speedbostFrame9
+
+-- TextLabel 6 "Steal Speed:"
+local speedbostTextLabel6 = Instance.new("TextLabel")
+speedbostTextLabel6.Text = "Steal Speed:"
+speedbostTextLabel6.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextLabel6.TextSize = 11
+speedbostTextLabel6.Font = Enum.Font.GothamBlack
+speedbostTextLabel6.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextLabel6.TextXAlignment = Enum.TextXAlignment.Left
+speedbostTextLabel6.Position = UDim2.new(0, 10, 0, 0)
+speedbostTextLabel6.Size = UDim2.new(1, -60, 1, 0)
+speedbostTextLabel6.BackgroundTransparency = 1
+speedbostTextLabel6.Name = "TextLabel"
+speedbostTextLabel6.Parent = speedbostFrame9
+
+-- TextBox 2
+local speedbostTextBox2 = Instance.new("TextBox")
+speedbostTextBox2.Text = "29"
+speedbostTextBox2.TextColor3 = Color3.fromRGB(150, 180, 255)
+speedbostTextBox2.TextSize = 11
+speedbostTextBox2.Font = Enum.Font.GothamBlack
+speedbostTextBox2.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+speedbostTextBox2.PlaceholderText = "0-45"
+speedbostTextBox2.PlaceholderColor3 = Color3.fromRGB(100, 100, 130)
+speedbostTextBox2.Position = UDim2.new(1, -45, .5, -10)
+speedbostTextBox2.Size = UDim2.new(0, 40, 0, 20)
+speedbostTextBox2.BackgroundColor3 = Color3.fromRGB(40, 50, 70)
+speedbostTextBox2.Name = "TextBox"
+speedbostTextBox2.Parent = speedbostFrame9
+
+-- UICorner 12 for speedbostTextBox2
+local speedbostUICorner12 = Instance.new("UICorner")
+speedbostUICorner12.CornerRadius = UDim.new(0, 4)
+speedbostUICorner12.Name = "UICorner"
+speedbostUICorner12.Parent = speedbostTextBox2
+-- ============================================================
+-- MINIMIZE WIRING (after all children exist)
+-- ============================================================
+
+-- Kinustinks: toggle visibility on all content rows
+local kinustinksContentRows = {
+    kinustinksFrame2,
+    kinustinksFrame3,
+    kinustinksFrame4,
+    kinustinksFrame7,
+    kinustinksFrame10,
+    kinustinksFrame13,
+    kinustinksTextLabel8,
+    kinustinksTextLabel2,
+}
+
+local minimizeTween = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+kinustinksTextButton.MouseButton1Click:Connect(function()
+    kinustinksMinimized = not kinustinksMinimized
+    if kinustinksMinimized then
+        -- shrink first, hide children once collapsed
+        TweenService:Create(kinustinksFrame, minimizeTween, {Size = UDim2.new(0, 190, 0, 40)}):Play()
+        task.delay(0.25, function()
+            for _, child in ipairs(kinustinksContentRows) do
+                child.Visible = false
+            end
+        end)
+    else
+        -- show children first, then expand
+        for _, child in ipairs(kinustinksContentRows) do
+            child.Visible = true
+        end
+        TweenService:Create(kinustinksFrame, minimizeTween, {Size = UDim2.new(0, 190, 0, 290)}):Play()
+    end
+    kinustinksTextButton.Text = kinustinksMinimized and "+" or "-"
+end)
+
+-- Speedbost: toggle visibility on all content rows
+local speedbostContentRows = {
+    speedbostFrame2,
+    speedbostFrame5,
+    speedbostFrame6,
+    speedbostFrame9,
+    speedbostTextLabel2,
+}
+
+speedbostTextButton.MouseButton1Click:Connect(function()
+    speedbostMinimized = not speedbostMinimized
+    if speedbostMinimized then
+        TweenService:Create(speedbostFrame, minimizeTween, {Size = UDim2.new(0, 190, 0, 40)}):Play()
+        task.delay(0.25, function()
+            for _, child in ipairs(speedbostContentRows) do
+                child.Visible = false
+            end
+        end)
+    else
+        for _, child in ipairs(speedbostContentRows) do
+            child.Visible = true
+        end
+        TweenService:Create(speedbostFrame, minimizeTween, {Size = UDim2.new(0, 190, 0, 195)}):Play()
+    end
+    speedbostTextButton.Text = speedbostMinimized and "+" or "-"
+end)
+end
