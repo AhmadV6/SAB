@@ -1,10 +1,10 @@
 --[[
     ALL FREE TOKINU HUB GUI SOURCES
-    discord.gg/rNvAU6cjVB
+    https://discord.gg/dwh5NHJax
 ]]
 
 
--- // Tokinu Speed Booster GUI
+-- // KawaiFu Speed Booster GUI
 -- // Clean rewrite from table-based format
 do
 local players = game:GetService("Players")
@@ -25,7 +25,7 @@ end
 
 -- // GUI Root
 local screen_gui = Instance.new("ScreenGui")
-screen_gui.Name = "TokinuBoosterGUI"
+screen_gui.Name = "KawaiFuBoosterGUI"
 screen_gui.Parent = player_gui
 
 -- // Main Frame
@@ -145,7 +145,7 @@ end)
 end
 task.wait(1)
 do
--- // Tokinu Hub - Instant Reset GUI
+-- // KawaiFu Hub - Instant Reset GUI
 -- // Clean rewrite from table-based format
 
 local players = game:GetService("Players")
@@ -276,7 +276,7 @@ end
 
 -- // GUI Root
 local screen_gui = Instance.new("ScreenGui")
-screen_gui.Name = "tokinu"
+screen_gui.Name = "KawaiFu"
 screen_gui.Parent = player_gui
 
 -- ============================================================
@@ -322,7 +322,7 @@ end)
 
 -- // Title
 local title_label = Instance.new("TextLabel")
-title_label.Text = "            Tokinu Hub"
+title_label.Text = "            KawaiFu Hub"
 title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
 title_label.TextSize = 14
 title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
@@ -533,7 +533,7 @@ end)
 
 -- // Discord watermark
 local discord_label = Instance.new("TextLabel")
-discord_label.Text = "discord.gg/tokinu"
+discord_label.Text = "discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(255, 255, 255)
 discord_label.TextTransparency = 0.3
 discord_label.TextSize = 11
@@ -667,7 +667,7 @@ end
 
 -- // GUI Root
 local screen_gui = Instance.new("ScreenGui")
-screen_gui.Name = "KevinHubLagger"
+screen_gui.Name = "KawaiFuHubLagger"
 screen_gui.Parent = player_gui
 
 -- ============================================================
@@ -715,7 +715,7 @@ end)
 -- // Header
 -- ============================================================
 local title_label = Instance.new("TextLabel")
-title_label.Text = "     Tokinu Hub | Lagger"
+title_label.Text = "     Kawaifu Hub | Lagger"
 title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
 title_label.TextSize = 15
 title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
@@ -736,7 +736,7 @@ title_gradient.Rotation = 59.4
 title_gradient.Parent = title_label
 
 local subtitle_label = Instance.new("TextLabel")
-subtitle_label.Text = "              discord.gg/tokinu"
+subtitle_label.Text = "              discord.gg/dwh5NHJax"
 subtitle_label.TextColor3 = Color3.fromRGB(150, 180, 255)
 subtitle_label.TextTransparency = 0.3
 subtitle_label.TextSize = 11
@@ -1047,7 +1047,7 @@ header_corner.CornerRadius = UDim.new(0, 12)
 header_corner.Parent = header
 
 local title_label = Instance.new("TextLabel")
-title_label.Text = "  Tokinu Hub discord.gg/tokinu"
+title_label.Text = "  KawaiFu Hub discord.gg/dwh5NHJax"
 title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
 title_label.TextSize = 16
 title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
@@ -1400,7 +1400,7 @@ end
 task.wait(1)
 do
 -- // Speed Booster GUI
--- // discord.gg/tokinu
+-- // discord.gg/dwh5NHJax
 
 local players = game:GetService("Players")
 local tween_service = game:GetService("TweenService")
@@ -1455,7 +1455,7 @@ title_label.Parent = main_frame
 
 -- // Discord Label
 local discord_label = Instance.new("TextLabel")
-discord_label.Text = "discord.gg/tokinu"
+discord_label.Text = "discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(180, 180, 200)
 discord_label.TextSize = 12
 discord_label.Font = Enum.Font.Gotham
@@ -1584,8 +1584,8 @@ end)
 end
 task.wait(1)
 do
--- // Tokinu Hub GUI
--- // discord.gg/tokinu
+-- // KawaiFu Hub GUI
+-- // discord.gg/dwh5NHJax
 
 local players = game:GetService("Players")
 local tween_service = game:GetService("TweenService")
@@ -1608,7 +1608,7 @@ end
 
 -- // GUI
 local tokinu_hub_gui = Instance.new("ScreenGui")
-tokinu_hub_gui.Name = "TokinuHub"
+tokinu_hub_gui.Name = "KawaiFuHub"
 tokinu_hub_gui.Parent = player_gui
 
 -- // Main Frame
@@ -1617,7 +1617,7 @@ main_frame.Position = UDim2.new(0, 40, 0, 60)
 main_frame.Size = UDim2.new(0, 260, 0, 175)
 main_frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 main_frame.BackgroundTransparency = 0.4
-main_frame.Parent = tokinu_hub_gui
+main_frame.Parent = KawaiFu_hub_gui
 
 local main_corner = Instance.new("UICorner")
 main_corner.CornerRadius = UDim.new(0, 14)
@@ -1634,7 +1634,7 @@ logo_image.Parent = main_frame
 
 -- // Title Label
 local title_label = Instance.new("TextLabel")
-title_label.Text = "Tokinu Hub"
+title_label.Text = "KawaiFu Hub"
 title_label.TextColor3 = Color3.fromRGB(255, 255, 255)
 title_label.TextSize = 19
 title_label.Font = Enum.Font.GothamBold
@@ -1679,7 +1679,7 @@ end)
 
 -- // Discord Label
 local discord_label = Instance.new("TextLabel")
-discord_label.Text = "discord.gg/tokinu"
+discord_label.Text = "discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(200, 200, 200)
 discord_label.TextSize = 13
 discord_label.Font = Enum.Font.Gotham
@@ -1720,7 +1720,7 @@ end
 task.wait(1)
 do
 -- // Tokinu Hub | Lagger GUI
--- // discord.gg/tokinu
+-- // discord.gg/dwh5NHJax
 
 local players = game:GetService("Players")
 local tween_service = game:GetService("TweenService")
@@ -1763,7 +1763,7 @@ end
 
 -- // GUI
 local lagger_gui = Instance.new("ScreenGui")
-lagger_gui.Name = "TokinuHubLagger"
+lagger_gui.Name = "KawaiFuHubLagger"
 lagger_gui.Parent = player_gui
 
 -- // Main Frame
@@ -1788,7 +1788,7 @@ make_stroke_gradient(main_stroke).Rotation = 227.1
 
 -- // Title Label
 local title_label = Instance.new("TextLabel")
-title_label.Text = "     Tokinu Hub | Lagger"
+title_label.Text = "     KawaiFu Hub | Lagger"
 title_label.TextColor3 = Color3.fromRGB(100, 150, 255)
 title_label.TextSize = 14
 title_label.Font = Enum.Font.GothamBlack
@@ -1820,7 +1820,7 @@ end)
 
 -- // Discord Label
 local discord_label = Instance.new("TextLabel")
-discord_label.Text = "            discord.gg/tokinu"
+discord_label.Text = "            discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(150, 180, 255)
 discord_label.TextTransparency = 0.3
 discord_label.TextSize = 11
@@ -2281,7 +2281,7 @@ fps_label.Parent = main_frame
 
 local discord_label = Instance.new("TextLabel")
 discord_label.Name = "DiscordLabel"
-discord_label.Text = "discord.gg/tokinu"
+discord_label.Text = "discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(114, 137, 218)
 discord_label.TextSize = 13
 discord_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
@@ -2329,7 +2329,7 @@ local is_minimized = false
 
 -- // Screen GUI
 local screen_gui = Instance.new("ScreenGui")
-screen_gui.Name = "TokinuHubGalaxy"
+screen_gui.Name = "KawaiFuHubGalaxy"
 screen_gui.ResetOnSpawn = false
 screen_gui.Parent = local_player:WaitForChild("PlayerGui")
 
@@ -2441,7 +2441,7 @@ title_bar.Parent = main_frame
 
 local title_label = Instance.new("TextLabel")
 title_label.Name = "TitleLabel"
-title_label.Text = "      Tokinu Hub - Base Protector"
+title_label.Text = "      KawaiFu Hub - Base Protector"
 title_label.TextColor3 = Color3.fromRGB(235, 235, 255)
 title_label.TextSize = 14
 title_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
@@ -2495,7 +2495,7 @@ action_corner.Parent = action_button
 -- // Discord label
 local discord_label = Instance.new("TextLabel")
 discord_label.Name = "DiscordLabel"
-discord_label.Text = "discord.gg/tokinu"
+discord_label.Text = "discord.gg/dwh5NHJax"
 discord_label.TextColor3 = Color3.fromRGB(180, 180, 200)
 discord_label.TextSize = 11
 discord_label.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
@@ -2592,7 +2592,7 @@ end)
 end
 task.wait(1)
 do
---// Tokinu Semi-TP
+--// KawaiFu Semi-TP
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -2717,7 +2717,7 @@ animateGradient(kinustinksUIGradient)
 
 -- TextLabel "Tokinu Hub"
 local kinustinksTextLabel = Instance.new("TextLabel")
-kinustinksTextLabel.Text = "            Tokinu Hub"
+kinustinksTextLabel.Text = "            Kawaifu Hub"
 kinustinksTextLabel.TextColor3 = Color3.fromRGB(100, 150, 255)
 kinustinksTextLabel.TextSize = 13
 kinustinksTextLabel.Font = Enum.Font.GothamBlack
@@ -3271,7 +3271,7 @@ kinustinksTextButton7.Parent = kinustinksFrame13
 
 -- TextLabel 8 "discord.gg/tokinu"
 local kinustinksTextLabel8 = Instance.new("TextLabel")
-kinustinksTextLabel8.Text = "discord.gg/tokinu"
+kinustinksTextLabel8.Text = "discord.gg/dwh5NHJax"
 kinustinksTextLabel8.TextColor3 = Color3.fromRGB(255, 255, 255)
 kinustinksTextLabel8.TextTransparency = 0.4000000059604645
 kinustinksTextLabel8.TextSize = 11
@@ -3354,7 +3354,7 @@ animateGradient(speedbostUIGradient2)
 
 -- TextLabel 2 "discord.gg/tokinu"
 local speedbostTextLabel2 = Instance.new("TextLabel")
-speedbostTextLabel2.Text = "         discord.gg/tokinu"
+speedbostTextLabel2.Text = "         discord.gg/dwh5NHJax"
 speedbostTextLabel2.TextColor3 = Color3.fromRGB(150, 180, 255)
 speedbostTextLabel2.TextTransparency = 0.30000001192092896
 speedbostTextLabel2.TextSize = 11
